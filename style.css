@@ -1,0 +1,66 @@
+body{
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #0d1117;
+    align-items: center;
+}
+h1{
+    color:white;
+    font: size 25px;
+    margin-top:20vh;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    width: 500px;
+    margin: auto;
+    margin-top:10vh
+  }
+  
+  .card {
+    background-color: #4e4e4e;
+    height: 100px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+  }
+  
+  .card.flipped {
+    transform: rotateY(180deg);
+  }
+  
+  .card .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .card .front {
+    background-color: #ffffff;
+    border-radius: 5px;
+  }
+  
+  .card .back {
+    background-color: blue; /* This will be dynamic */
+    transform: rotateY(180deg);
+  }
+  
+  .win-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black */
+    color: white; /* White text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    z-index: 1000; /* Ensure it sits above other content */
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+  }
