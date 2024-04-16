@@ -697,20 +697,6 @@ a+span {font-size: 24px; text-decoration: none;}
 	  transform: translateY(0);
 	}
   }
-
-  @keyframes fadeInDown {
-	from {
-	  opacity: 0;
-	  /* scale: 95%; */
-	  transform: translateY(-30px);
-	}
-	to {
-	  opacity: 1;
-	  /* scale: 100%; */
-	  transform: translateY(0);
-	}
-  }
-
   .fadeInUp {
 	opacity: 0;
 	animation: fadeInUp 600ms ease-out forwards;
@@ -721,10 +707,24 @@ a+span {font-size: 24px; text-decoration: none;}
     animation: fadeInUp 600ms ease-out forwards;
 }
 
-  .fadeInDown {
-	animation: fadeInDown 600ms ease-out forwards;
-  }
 
+
+  @keyframes fadeOutDown {
+	from {
+	  opacity: 1;
+	  transform: translateY(0px);
+	}
+	to {
+	  opacity: 0;
+	  transform: translateY(30px);
+	}
+  }
+  
+  .fadeOutDown {
+	opacity: 1;
+	animation: fadeOutDown 600ms ease-out forwards;
+  }
+  
 
 
 
