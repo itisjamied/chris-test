@@ -645,10 +645,33 @@ a+span {font-size: 24px; text-decoration: none;}
   to {opacity: 1; top:0px;} 
 }
 
+
 @keyframes fadein {
 	  from {opacity: 0; scale: 95%;}
 	  to {opacity: 1; scale: 100%; } 
 }  
+
+@keyframes fadeInUp {
+	from {
+	  opacity: 0;
+	  transform: translateY(30px);
+	}
+	to {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+}
+
+@keyframes fadeOutDown {
+	from {
+	  opacity: 1;
+	  transform: translateY(0px);
+	}
+	to {
+	  opacity: 0;
+	  transform: translateY(30px);
+	}
+}
 
 .text-jumbo+.text-jumbo{ 
 	animation-name: flicker;
@@ -656,30 +679,14 @@ a+span {font-size: 24px; text-decoration: none;}
 	animation-timing-function: ease-in-out;
 	animation-delay: 1s;
 	animation-iteration-count: 3;
- }
+}
 
-/* .home header {
+
+.home main {
 	animation-timing-function:ease-out;
-	animation-name: fadedown;
+	animation-name: fadeup;
 	animation-duration: 600ms;
-} */
-
-@keyframes fadedown {
-	from {opacity: 0; top:-30px;}
-	to {opacity: 1; top:0px;} 
-  }
-  
-  .animated-header {
-	  animation-timing-function: ease-out;
-	  animation-name: fadedown;
-	  animation-duration: 600ms;
-  }
-
-.home nav div, .home main {
-		animation-timing-function:ease-out;
-		animation-name: fadeup;
-		animation-duration: 600ms;
-	}
+}
 
 	
 .desktop-col-6+.desktop-col-6.animation-container { min-height: 126px;}	
@@ -696,16 +703,7 @@ a+span {font-size: 24px; text-decoration: none;}
 
 /* END OF ANIMATIONS */
 
-@keyframes fadeInUp {
-	from {
-	  opacity: 0;
-	  transform: translateY(30px);
-	}
-	to {
-	  opacity: 1;
-	  transform: translateY(0);
-	}
-  }
+
   .fadeInUp {
 	opacity: 0;
 	animation: fadeInUp 600ms ease-out forwards;
@@ -715,23 +713,29 @@ a+span {font-size: 24px; text-decoration: none;}
     opacity: 1;
     animation: fadeInUp 600ms ease-out forwards;
 }
-
-  @keyframes fadeOutDown {
-	from {
-	  opacity: 1;
-	  transform: translateY(0px);
-	}
-	to {
-	  opacity: 0;
-	  transform: translateY(30px);
-	}
-  }
   
   .fadeOutDown {
 	opacity: 1;
 	animation: fadeOutDown 600ms ease-out forwards;
   }
   
+.animated-header {
+	animation-timing-function: ease-out;
+	animation-name: fadedown;
+	animation-duration: 600ms;
+}
+
+.animated-footer {
+	animation-timing-function: ease-out;
+	animation-name: fadeInUp;
+	animation-duration: 600ms;
+}
+
+.animated-nav {
+	animation-timing-function: ease-out;
+	animation-name: fadeInUp;
+	animation-duration: 600ms;
+}
 
 
 

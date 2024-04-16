@@ -9,16 +9,6 @@ function isInViewport(element) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  var hasAnimated = sessionStorage.getItem("hasAnimated");
-
-  if (!hasAnimated) {
-    var header = document.getElementById("animatedHeader");
-    header.classList.add("animated-header"); // Make sure this class matches what you have defined in CSS
-
-    // Set the flag in sessionStorage
-    sessionStorage.setItem("hasAnimated", "true");
-  }
-
   const fadeInUpElements = document.querySelectorAll(".fadeInUp:not(nav)");
   fadeInUpElements.forEach(function (element, index) {
     element.style.animationDelay = `${index * 600}ms`;
@@ -52,3 +42,20 @@ document.addEventListener("DOMContentLoaded", function () {
     player.play();
   }, 600); // Delay in milliseconds (5000ms = 5 seconds)
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  animateOncePerSession("animatedHeader", "animated-header");
+  animateOncePerSession("animatedNav", "animated-nav");
+  animateOncePerSession("animatedFooter", "animated-footer");
+});
+
+function animateOncePerSession(elementId, animationClass) {
+  var element = document.getElementById(elementId);
+  if (element && !sessionStorage.getItem(elementId + "Animated")) {
+    // Apply the specified animation class
+    element.classList.add(animationClass);
+
+    // Set the flag in session storage
+    sessionStorage.setItem(elementId + "Animated", "true");
+  }
+}
