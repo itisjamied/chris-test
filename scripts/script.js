@@ -46,4 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }, delayCounter * 600 + 500); // adjust navigation delay based on visible elements
     });
   });
+
+  setTimeout(function () {
+    const player = document.getElementById("lottieAnimation");
+    player.play();
+  }, 600); // Delay in milliseconds (5000ms = 5 seconds)
 });
