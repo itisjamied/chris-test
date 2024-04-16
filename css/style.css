@@ -658,11 +658,22 @@ a+span {font-size: 24px; text-decoration: none;}
 	animation-iteration-count: 3;
  }
 
-.home header {
+/* .home header {
 	animation-timing-function:ease-out;
 	animation-name: fadedown;
 	animation-duration: 600ms;
-}
+} */
+
+@keyframes fadedown {
+	from {opacity: 0; top:-30px;}
+	to {opacity: 1; top:0px;} 
+  }
+  
+  .animated-header {
+	  animation-timing-function: ease-out;
+	  animation-name: fadedown;
+	  animation-duration: 600ms;
+  }
 
 .home nav div, .home main {
 		animation-timing-function:ease-out;
@@ -688,12 +699,10 @@ a+span {font-size: 24px; text-decoration: none;}
 @keyframes fadeInUp {
 	from {
 	  opacity: 0;
-	  /* scale: 95%; */
 	  transform: translateY(30px);
 	}
 	to {
 	  opacity: 1;
-	  /* scale: 100%; */
 	  transform: translateY(0);
 	}
   }
@@ -706,8 +715,6 @@ a+span {font-size: 24px; text-decoration: none;}
     opacity: 1;
     animation: fadeInUp 600ms ease-out forwards;
 }
-
-
 
   @keyframes fadeOutDown {
 	from {

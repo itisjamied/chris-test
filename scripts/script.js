@@ -9,6 +9,16 @@ function isInViewport(element) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  var hasAnimated = sessionStorage.getItem("hasAnimated");
+
+  if (!hasAnimated) {
+    var header = document.getElementById("animatedHeader");
+    header.classList.add("animated-header"); // Make sure this class matches what you have defined in CSS
+
+    // Set the flag in sessionStorage
+    sessionStorage.setItem("hasAnimated", "true");
+  }
+
   const fadeInUpElements = document.querySelectorAll(".fadeInUp:not(nav)");
   fadeInUpElements.forEach(function (element, index) {
     element.style.animationDelay = `${index * 600}ms`;
