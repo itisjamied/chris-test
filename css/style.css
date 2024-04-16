@@ -20,7 +20,6 @@ table {border-collapse: collapse;border-spacing: 0;}
 	--white: #ffffff;
 }
 
-
 * {box-sizing: border-box; position:relative; -webkit-font-smoothing: antialiased;}
 
 ::selection {background: var(--nearwhite); color: var(--almostblack);}
