@@ -669,6 +669,7 @@ a+span {font-size: 24px; text-decoration: none;}
 		animation-name: fadeup;
 		animation-duration: 600ms;
 	}
+
 	
 .desktop-col-6+.desktop-col-6.animation-container { min-height: 126px;}	
 @media (min-width: 1265px) {
@@ -681,8 +682,48 @@ a+span {font-size: 24px; text-decoration: none;}
 }	
 
 
+
 /* END OF ANIMATIONS */
 
+@keyframes fadeInUp {
+	from {
+	  opacity: 0;
+	  /* scale: 95%; */
+	  transform: translateY(30px);
+	}
+	to {
+	  opacity: 1;
+	  /* scale: 100%; */
+	  transform: translateY(0);
+	}
+  }
+
+  @keyframes fadeInDown {
+	from {
+	  opacity: 0;
+	  /* scale: 95%; */
+	  transform: translateY(-30px);
+	}
+	to {
+	  opacity: 1;
+	  /* scale: 100%; */
+	  transform: translateY(0);
+	}
+  }
+
+  .fadeInUp {
+	opacity: 0;
+	animation: fadeInUp 600ms ease-out forwards;
+  }
+
+  nav.fadeInUp {
+    opacity: 1;
+    animation: fadeInUp 600ms ease-out forwards;
+}
+
+  .fadeInDown {
+	animation: fadeInDown 600ms ease-out forwards;
+  }
 
 
 
