@@ -47,14 +47,14 @@ function animateOnLoad() {
   );
 
   fadeInUpElements.forEach((element, index) => {
-    if (isInViewport(element)) {
+    if (element) {
       element.style.animationDelay = `${index * 600}ms`;
     } else {
       // element.classList.remove("fadeInUp");
     }
   });
 
-  handleNavigation(fadeInUpElements.filter(isInViewport));
+  handleNavigation(fadeInUpElements);
 
   setTimeout(() => {
     const player = document.getElementById("lottieAnimation");
