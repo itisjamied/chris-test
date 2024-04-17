@@ -70,8 +70,25 @@ function animateOncePerSession(elementId, animationClass) {
   }
 }
 
+function checkHeaderInView() {
+  const header = document.getElementById("animatedHeader");
+  let wasInViewport = isInViewport(header);
+
+  window.addEventListener("scroll", () => {
+    const isInViewNow = isInViewport(header);
+    if (!isInViewNow && wasInViewport) {
+      sessionStorage.removeItem("animatedHeaderAnimated");
+      wasInViewport = false;
+    } else if (isInViewNow && !wasInViewport) {
+      sessionStorage.setItem("animatedHeaderAnimated", "true");
+      wasInViewport = true;
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   animateOnLoad();
   animateOncePerSession("animatedHeader", "animated-header");
   animateOncePerSession("animatedNav", "animated-nav");
+  checkHeaderInView();
 });
