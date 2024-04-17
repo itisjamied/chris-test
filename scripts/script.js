@@ -1,75 +1,61 @@
 function isInViewport(element) {
   const rect = element.getBoundingClientRect();
   return (
-    rect.bottom > 0 &&
-    rect.right > 0 &&
-    rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.left < (window.innerWidth || document.documentElement.clientWidth)
+    rect.bottom > 0 && // bottom must be below the top of the viewport
+    rect.right > 0 && // right side must be right of the viewport's left edge
+    rect.top < (window.innerHeight || document.documentElement.clientHeight) && // top must be above the bottom of the viewport
+    rect.left < (window.innerWidth || document.documentElement.clientWidth) // left must be left of the viewport's right edge
   );
 }
 
-function handleNavigation(fadeInUpElements) {
-  const navLinks = document.querySelectorAll("nav a");
-  const logoLinks = document.querySelectorAll("header a img");
-  const footerLinks = document.querySelectorAll("footer a img");
+document.addEventListener("DOMContentLoaded", function () {
+  const fadeInUpElements = document.querySelectorAll(".fadeInUp:not(nav)");
+  fadeInUpElements.forEach(function (element, index) {
+    element.style.animationDelay = `${index * 600}ms`;
+  });
 
-  [...navLinks, ...logoLinks, ...footerLinks].forEach((img) => {
-    const anchor = img.closest("a"); // This finds the nearest ancestor which is an anchor
-    if (!anchor) return; // If no anchor is found, skip adding the event listener
+  document.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault(); // stop the link from navigating immediately
+      const targetUrl = this.href;
 
-    anchor.addEventListener("click", (e) => {
-      e.preventDefault();
-      const targetUrl = anchor.href; // Use the href from the anchor, not the img
-      let delayCounter = 0;
-
-      fadeInUpElements
+      let delayCounter = 0; // counter to track of the number of visible elements
+      const visibleElements = [...fadeInUpElements]
         .filter(isInViewport)
-        .reverse()
-        .forEach((element, index) => {
-          element.classList.replace("fadeInUp", "fadeOutDown");
-          element.style.animationDelay = `${index * 600}ms`;
-          delayCounter++;
-        });
+        .reverse();
 
-      setTimeout(
-        () => (window.location.href = targetUrl),
-        delayCounter * 600 + 500
-      );
+      visibleElements.forEach((element, index) => {
+        element.classList.remove("fadeInUp");
+        element.classList.add("fadeOutDown");
+        element.style.animationDelay = `${index * 600}ms`;
+        delayCounter++; // increment for each visible element
+      });
+
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, delayCounter * 600 + 500); // adjust navigation delay based on visible elements
     });
   });
-}
 
-function animateOnLoad() {
-  const elements = document.querySelectorAll(".fadeInUp:not(nav)");
-  Array.from(elements).forEach((element, index) => {
-    if (isInViewport(element)) {
-      element.style.animationDelay = `${index * 600}ms`; // Staggered fade-in for elements in viewport
-    } else {
-      element.classList.remove("fadeInUp"); // Remove the animation class for elements not in viewport
-    }
-  });
-
-  setTimeout(() => {
+  setTimeout(function () {
     const player = document.getElementById("lottieAnimation");
-    if (player) player.play();
-  }, 1200);
-}
+    player.play();
+  }, 600); // Delay in milliseconds (5000ms = 5 seconds)
+});
 
-function animateOncePerSession(elementId, animationClass) {
-  const element = document.getElementById(elementId);
-  if (element && isInViewport(element)) {
-    if (!sessionStorage.getItem(`${elementId}Animated`)) {
-      element.classList.add(animationClass);
-      sessionStorage.setItem(`${elementId}Animated`, "true");
-    }
-  } else if (element) {
-    // Always animate if not in the viewport initially
-    element.classList.add(animationClass);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  animateOnLoad(); // This will setup all animations
+document.addEventListener("DOMContentLoaded", function () {
   animateOncePerSession("animatedHeader", "animated-header");
   animateOncePerSession("animatedNav", "animated-nav");
+  animateOncePerSession("animatedFooter", "animated-footer");
 });
+
+function animateOncePerSession(elementId, animationClass) {
+  var element = document.getElementById(elementId);
+  if (element && !sessionStorage.getItem(elementId + "Animated")) {
+    // Apply the specified animation class
+    element.classList.add(animationClass);
+
+    // Set the flag in session storage
+    sessionStorage.setItem(elementId + "Animated", "true");
+  }
+}
