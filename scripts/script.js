@@ -16,6 +16,9 @@ function handleNavigation(fadeInUpElements) {
   [...navLinks, ...logoLinks, ...footerLinks].forEach((img) => {
     const anchor = img.closest("a"); // This finds the nearest ancestor which is an anchor
     if (!anchor) return;
+
+    if (anchor.classList.contains("disabled")) return;
+
     anchor.addEventListener("click", (e) => {
       e.preventDefault();
       const targetUrl = anchor.href; // Use the href from the anchor, not the img
@@ -43,13 +46,11 @@ function animateOnLoad() {
     document.querySelectorAll(".fadeInUp:not(nav)")
   );
 
-  // Only animate elements that are in the viewport on load
   fadeInUpElements.forEach((element, index) => {
     if (isInViewport(element)) {
       element.style.animationDelay = `${index * 600}ms`;
     } else {
-      // For elements not in the viewport, remove the animation class
-      element.classList.remove("fadeInUp");
+      // element.classList.remove("fadeInUp");
     }
   });
 
