@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     const player = document.getElementById("lottieAnimation");
     player.play();
-  }, 600); // Delay in milliseconds (5000ms = 5 seconds)
+  }, 1200); // Delay in milliseconds (5000ms = 5 seconds)
 });
 
 document.addEventListener("DOMContentLoaded", function () {
