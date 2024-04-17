@@ -42,11 +42,18 @@ function animateOnLoad() {
   const fadeInUpElements = Array.from(
     document.querySelectorAll(".fadeInUp:not(nav)")
   );
+
+  // Only animate elements that are in the viewport on load
   fadeInUpElements.forEach((element, index) => {
-    element.style.animationDelay = `${index * 600}ms`;
+    if (isInViewport(element)) {
+      element.style.animationDelay = `${index * 600}ms`;
+    } else {
+      // For elements not in the viewport, remove the animation class
+      element.classList.remove("fadeInUp");
+    }
   });
 
-  handleNavigation(fadeInUpElements);
+  handleNavigation(fadeInUpElements.filter(isInViewport));
 
   setTimeout(() => {
     const player = document.getElementById("lottieAnimation");
