@@ -51,6 +51,7 @@ function animateOnLoad() {
     if (isInViewport(element)) {
       element.classList.add("animated");
     } else {
+      element.style.visibility = "visible";
     }
   });
 

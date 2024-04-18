@@ -716,9 +716,13 @@ a+span {font-size: 24px; text-decoration: none;}
 
 
 /* END OF ANIMATIONS */
-
+.fadeInUp{
+	visibility: hidden; /* hide elements initially */
+    animation-fill-mode: forwards; 
+}
 
   .fadeInUp.animated {
+	visibility: visible;
 	opacity: 0;
 	animation: fadeInUp 600ms ease-out forwards;
 }
