@@ -14,14 +14,13 @@ function handleNavigation(fadeInUpElements) {
   const footerLinks = document.querySelectorAll("footer a img");
 
   [...navLinks, ...logoLinks, ...footerLinks].forEach((img) => {
-    const anchor = img.closest("a"); // This finds the nearest ancestor which is an anchor
-    if (!anchor) return;
+    const anchor = img.closest("a");
 
     if (anchor.classList.contains("disabled")) return;
 
     anchor.addEventListener("click", (e) => {
       e.preventDefault();
-      const targetUrl = anchor.href; // Use the href from the anchor, not the img
+      const targetUrl = anchor.href;
       let delayCounter = 0;
 
       fadeInUpElements
@@ -47,10 +46,12 @@ function animateOnLoad() {
   );
 
   fadeInUpElements.forEach((element, index) => {
-    if (element) {
-      element.style.animationDelay = `${index * 600}ms`;
+    element.style.animationDelay = `${index * 600}ms`;
+
+    if (isInViewport(element)) {
+      element.classList.add("animated");
     } else {
-      // element.classList.remove("fadeInUp");
+      element.style.visibility = "visible";
     }
   });
 
