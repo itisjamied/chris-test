@@ -306,6 +306,7 @@ header {
 	padding-top:25px;
 	display: flex;
 	align-items: flex-start;
+	opacity: 0;
 }
 header.internal {position: relative;}
 header img {margin-right:16px;}
@@ -721,23 +722,24 @@ a+span {font-size: 24px; text-decoration: none;}
     animation-fill-mode: forwards; 
 }
 
-  .fadeInUp.animated {
+.fadeInUp.animated {
 	visibility: visible;
 	opacity: 0;
 	animation: fadeInUp 600ms ease-out forwards;
 }
 
-  nav.fadeInUp {
+nav.fadeInUp {
     opacity: 1;
     animation: fadeInUp 600ms ease-out forwards;
 }
   
-  .fadeOutDown {
+.fadeOutDown {
 	opacity: 1;
 	animation: fadeOutDown 600ms ease-out forwards;
   }
   
 .animated-header {
+	animation-fill-mode: forwards;
 	animation-timing-function: ease-out;
 	animation-name: fadedown;
 	animation-duration: 600ms;
