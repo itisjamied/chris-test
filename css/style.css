@@ -306,6 +306,7 @@ header {
 	padding-top:25px;
 	display: flex;
 	align-items: flex-start;
+	opacity: 0;
 }
 header.internal {position: relative;}
 header img {margin-right:16px;}
@@ -738,6 +739,7 @@ nav.fadeInUp {
   }
   
 .animated-header {
+	animation-fill-mode: forwards;
 	animation-timing-function: ease-out;
 	animation-name: fadedown;
 	animation-duration: 600ms;

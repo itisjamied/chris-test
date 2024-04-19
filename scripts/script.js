@@ -89,9 +89,17 @@ function checkHeaderInView() {
   });
 }
 
+function resetHeaderOpacity() {
+  const header = document.querySelector('header');
+  if(header){
+    header.style.opacity = "1";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   animateOnLoad();
   animateOncePerSession("animatedHeader", "animated-header");
   animateOncePerSession("animatedNav", "animated-nav");
   checkHeaderInView();
+  resetHeaderOpacity();
 });
