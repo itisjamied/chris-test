@@ -12,7 +12,9 @@ function handleNavigation(fadeInUpElements) {
   const navLinks = document.querySelectorAll("nav a");
   const logoLinks = document.querySelectorAll("header a img");
   const footerLinks = document.querySelectorAll("footer a img");
+  // const headerLinks = document.querySelectorAll("header a");
 
+  // [...navLinks, ...logoLinks, ...footerLinks, ...headerLinks].forEach((img) => {
   [...navLinks, ...logoLinks, ...footerLinks].forEach((img) => {
     const anchor = img.closest("a");
 
