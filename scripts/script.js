@@ -51,27 +51,26 @@ function handleNavigation(fadeInUpElements) {
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const fadeInUpElements = Array.from(document.querySelectorAll(".fadeInUp:not(nav)"));
-  handleNavigation(fadeInUpElements);
+// document.addEventListener("DOMContentLoaded", () => {
+//   const fadeInUpElements = Array.from(document.querySelectorAll(".fadeInUp:not(nav)"));
+//   handleNavigation(fadeInUpElements);
 
-  setTimeout(() => {
-    fadeInUpElements.forEach((element, index) => {
-      if (isInViewport(element)) {
-        element.classList.add("animated");
-      } else {
-        element.style.visibility = "visible";
-      }
-      element.style.animationDelay = `${index * 600}ms`;
-    });
-  }, 200); 
-});
+//   setTimeout(() => {
+//     fadeInUpElements.forEach((element, index) => {
+//       if (isInViewport(element)) {
+//         element.classList.add("animated");
+//       } else {
+//         element.style.visibility = "visible";
+//       }
+//       element.style.animationDelay = `${index * 600}ms`;
+//     });
+//   }, 200); 
+// });
 
 function animateOnLoad() {
   const fadeInUpElements = Array.from(
     document.querySelectorAll(".fadeInUp:not(nav)")
   );
-
 
 
   setTimeout(() => {
@@ -88,17 +87,6 @@ function animateOnLoad() {
       }
     });
   }, 10);
-
-  setTimeout(() => {
-    fadeInUpElements.forEach((element, index) => {
-      element.style.animationDelay = `${index * 600}ms`;
-      if (isInViewport(element)) {
-        element.classList.add("animated");
-      } else {
-        element.style.visibility = "visible";
-      }
-    });
-  }, 1000); 
 
   handleNavigation(fadeInUpElements);
 
