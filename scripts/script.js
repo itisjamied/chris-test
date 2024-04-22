@@ -15,18 +15,15 @@ function handleNavigation(fadeInUpElements) {
   const headerLinks = document.querySelectorAll("header a");
 
   [...navLinks, ...logoLinks, ...footerLinks, ...headerLinks].forEach((img) => {
-  // [...navLinks, ...logoLinks, ...footerLinks].forEach((img) => {
     const anchor = img.closest("a");
 
     if (anchor.classList.contains("disabled")) return;
 
     anchor.addEventListener("click", (e) => {
 
-      // Check if the href attribute is a pure anchor link (just '#')
       const isPureAnchor = anchor.getAttribute('href').startsWith('#') && anchor.host === window.location.host && anchor.pathname === window.location.pathname;
 
       if (isPureAnchor) {
-        // It's an anchor link; do nothing special
         return;
       } else {
 
@@ -130,6 +127,23 @@ function resetHeaderOpacity() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  animateOnLoad();
+  animateOncePerSession("animatedHeader", "animated-header");
+  animateOncePerSession("animatedNav", "animated-nav");
+  checkHeaderInView();
+  resetHeaderOpacity();
+
+});
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    console.log("Page was loaded from the cache");
+    // re-initialize animations or reset styles here
+    document.querySelectorAll(".fadeOutDown").forEach(el => {
+      el.classList.replace("fadeOutDown", "fadeInUp");
+    });
+  }
+  // always call initialization functions
   animateOnLoad();
   animateOncePerSession("animatedHeader", "animated-header");
   animateOncePerSession("animatedNav", "animated-nav");
