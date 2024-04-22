@@ -15,18 +15,15 @@ function handleNavigation(fadeInUpElements) {
   const headerLinks = document.querySelectorAll("header a");
 
   [...navLinks, ...logoLinks, ...footerLinks, ...headerLinks].forEach((img) => {
-  // [...navLinks, ...logoLinks, ...footerLinks].forEach((img) => {
     const anchor = img.closest("a");
 
     if (anchor.classList.contains("disabled")) return;
 
     anchor.addEventListener("click", (e) => {
 
-      // Check if the href attribute is a pure anchor link (just '#')
       const isPureAnchor = anchor.getAttribute('href').startsWith('#') && anchor.host === window.location.host && anchor.pathname === window.location.pathname;
 
       if (isPureAnchor) {
-        // It's an anchor link; do nothing special
         return;
       } else {
 
@@ -54,64 +51,6 @@ function handleNavigation(fadeInUpElements) {
 
 
 
-
-
-
-// function handleNavigation(fadeInUpElements) {
-//   // Selecting all necessary elements
-//   const navLinks = document.querySelectorAll("nav a");
-//   const logoLinks = document.querySelectorAll("header img");
-//   const footerLinks = document.querySelectorAll("footer img");
-//   const headerLinks = document.querySelectorAll("header a");
-
-//   // Function to handle generic navigation (excluding special header links)
-//   const handleGenericNavigation = (element) => {
-//     element.addEventListener("click", (e) => {
-//       // Prevent default navigation
-//       e.preventDefault();
-//       // Navigate to the URL specified in the href attribute
-//       window.location.href = element.href;
-//     });
-//   };
-
-//   // Apply generic navigation handling to nav, logo, and footer links
-//   [...navLinks, ...logoLinks, ...footerLinks].forEach(handleGenericNavigation);
-
-//   // Special handling for header links
-//   headerLinks.forEach((anchor) => {
-//     anchor.addEventListener("click", (e) => {
-//       const href = anchor.getAttribute("href");
-//       if (href && href.includes("our-approach.html#")) {
-//         // Preventing the default action (navigation)
-//         e.preventDefault();
-
-//         console.log("Handling special navigation for: ", anchor.href);
-//         const targetUrl = anchor.href;
-//         let delayCounter = 0;
-
-//         // Filter and reverse elements to animate based on viewport visibility
-//         const elementsToAnimate = fadeInUpElements.filter(isInViewport).reverse();
-
-//         // Apply fade-out animation
-//         elementsToAnimate.forEach((element, index) => {
-//           element.classList.replace("fadeInUp", "fadeOutDown");
-//           element.style.animationDelay = `${index * 600}ms`;
-//           delayCounter++;
-//         });
-
-//         // After animations, navigate to the target URL
-//         setTimeout(() => window.location.href = targetUrl, delayCounter * 600 + 500);
-//       } else {
-//         // For header links not matching the special condition, use generic navigation
-//         handleGenericNavigation(anchor);
-//       }
-//     });
-//   });
-// }
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const fadeInUpElements = Array.from(document.querySelectorAll(".fadeInUp:not(nav)"));
   handleNavigation(fadeInUpElements);
@@ -132,6 +71,23 @@ function animateOnLoad() {
   const fadeInUpElements = Array.from(
     document.querySelectorAll(".fadeInUp:not(nav)")
   );
+
+
+
+  setTimeout(() => {
+    let viewportIndex = 0;  
+    fadeInUpElements.forEach((element) => {
+      if (isInViewport(element)) {
+        element.style.animationDelay = `${viewportIndex * 600}ms`;
+        element.classList.add("animated");
+        console.log("In viewport:", viewportIndex)
+        viewportIndex++;  
+      } else {
+        element.style.visibility = "visible";
+        console.log("Not in viewport:", viewportIndex)
+      }
+    });
+  }, 10);
 
   setTimeout(() => {
     fadeInUpElements.forEach((element, index) => {
@@ -189,4 +145,22 @@ document.addEventListener("DOMContentLoaded", () => {
   animateOncePerSession("animatedNav", "animated-nav");
   checkHeaderInView();
   resetHeaderOpacity();
+
 });
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    console.log("Page was loaded from the cache");
+    // re-initialize animations or reset styles here
+    document.querySelectorAll(".fadeOutDown").forEach(el => {
+      el.classList.replace("fadeOutDown", "fadeInUp");
+    });
+  }
+  // always call initialization functions
+  animateOnLoad();
+  animateOncePerSession("animatedHeader", "animated-header");
+  animateOncePerSession("animatedNav", "animated-nav");
+  checkHeaderInView();
+  resetHeaderOpacity();
+});
+
