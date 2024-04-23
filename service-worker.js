@@ -41,24 +41,57 @@ const urlsToCache = [
 // });
 
 self.addEventListener('install', event => {
-    event.waitUntil(
-      caches.open(CACHE_NAME)
-        .then(cache => {
-          return cache.addAll(urlsToCache);
-        })
-        .then(() => self.skipWaiting()) // Forces the waiting Service Worker to become the active Service Worker
-    );
-  });
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        return cache.addAll(urlsToCache);
+      })
+      .then(() => self.skipWaiting())
+      .then(() => {
+        if (navigator.storage && navigator.storage.persist)
+          return navigator.storage.persist();
+      })
+      .then(persistent => {
+        if (persistent)
+          console.log("The storage will be persistent");
+        else
+          console.log("The storage may not be persistent");
+      })
+  );
+});
+
   
   self.addEventListener('activate', event => {
     event.waitUntil(self.clients.claim()); // Claims clients immediately for the active worker to take control
   });
   
+  // self.addEventListener('fetch', event => {
+  //   event.respondWith(
+  //     caches.match(event.request).then(cachedResponse => {
+  //       return cachedResponse || fetch(event.request);
+  //     })
+  //   );
+  // });
+  
   self.addEventListener('fetch', event => {
     event.respondWith(
-      caches.match(event.request).then(cachedResponse => {
-        return cachedResponse || fetch(event.request);
-      })
+      // Try to get the response from the cache
+      caches.match(event.request)
+        .then(cachedResponse => {
+          if (cachedResponse) {
+            // If there is a cached response, return it immediately
+            return cachedResponse;
+          }
+  
+          // If the cache does not have the requested resource, fetch it from the network
+          return fetch(event.request).then(response => {
+            // Put the new resource into the cache
+            return caches.open(CACHE_NAME).then(cache => {
+              cache.put(event.request, response.clone());
+              return response;
+            });
+          });
+        })
     );
   });
   
