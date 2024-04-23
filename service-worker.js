@@ -62,7 +62,7 @@ self.addEventListener('install', event => {
 
   
   self.addEventListener('activate', event => {
-    event.waitUntil(self.clients.claim()); // Claims clients immediately for the active worker to take control
+    event.waitUntil(self.clients.claim()); // claims clients immediately for the active worker to take control
   });
   
   // self.addEventListener('fetch', event => {
@@ -75,15 +75,14 @@ self.addEventListener('install', event => {
   
   self.addEventListener('fetch', event => {
     event.respondWith(
-      // Try to get the response from the cache
       caches.match(event.request)
         .then(cachedResponse => {
           if (cachedResponse) {
-            // If there is a cached response, return it immediately
+            console.log(`Cache hit: ${event.request.url}`);
             return cachedResponse;
           }
   
-          // If the cache does not have the requested resource, fetch it from the network
+          console.log(`Cache miss: ${event.request.url}. Fetching from network...`);
           return fetch(event.request).then(response => {
             // Put the new resource into the cache
             return caches.open(CACHE_NAME).then(cache => {
