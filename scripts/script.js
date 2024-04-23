@@ -79,11 +79,9 @@ function animateOnLoad() {
       if (isInViewport(element)) {
         element.style.animationDelay = `${viewportIndex * 600}ms`;
         element.classList.add("animated");
-        console.log("In viewport:", viewportIndex)
         viewportIndex++;  
       } else {
         element.style.visibility = "visible";
-        console.log("Not in viewport:", viewportIndex)
       }
     });
   }, 10);
@@ -108,14 +106,24 @@ function checkHeaderInView() {
   const header = document.getElementById("animatedHeader");
   let wasInViewport = isInViewport(header);
 
+   // Set initial opacity based on sessionStorage
+   header.style.opacity = sessionStorage.getItem("headerOpacity") || "1";
+
   window.addEventListener("scroll", () => {
     const isInViewNow = isInViewport(header);
     if (!isInViewNow && wasInViewport) {
       sessionStorage.removeItem("animatedHeaderAnimated");
       wasInViewport = false;
+      header.style.opacity = "0";
+      sessionStorage.setItem("headerOpacity", "0");
+      console.log("header not in view")
     } else if (isInViewNow && !wasInViewport) {
       sessionStorage.setItem("animatedHeaderAnimated", "true");
       wasInViewport = true;
+      header.style.opacity = "1";
+      sessionStorage.setItem("headerOpacity", "1");
+      console.log("header in view")
+
     }
   });
 }
@@ -138,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 window.addEventListener("pageshow", (event) => {
   if (event.persisted) {
-    console.log("Page was loaded from the cache");
+    ("Page was loaded from the cache");
     // re-initialize animations or reset styles here
     document.querySelectorAll(".fadeOutDown").forEach(el => {
       el.classList.replace("fadeOutDown", "fadeInUp");

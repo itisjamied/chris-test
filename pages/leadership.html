@@ -20,13 +20,26 @@ careers@valueform.io
 <link href="../images/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
 
 <link rel="stylesheet" href="../css/style.css" type="text/css" />
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!-- <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> -->
 <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+<script>
+	if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../service-worker.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // Registration failed
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
 
+</script>
 </head>
 <body>
 <section class="wrapper">
-	<header class="container text-s internal " id="animatedHeader">
+	<header class="container text-s internal " id="animatedHeader" style="opacity: 1;">
 		<a href="../index.html">
 			<img src="../images/logo.svg" alt="ValueForm's Logo" />
 		</a>	
