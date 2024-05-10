@@ -102,36 +102,46 @@ function animateOncePerSession(elementId, animationClass) {
   }
 }
 
+applyHeaderOpacity();
+
+function applyHeaderOpacity() {  
+  // Set initial opacity based on sessionStorage
+  console.log("applyHeaderOpacity", sessionStorage.getItem("headerOpacity") || "1");
+  document.body.style.setProperty('--header-opacity', sessionStorage.getItem("headerOpacity") || "1");
+}
+
+function setHeaderOpacity(opacity) {
+  console.log("setHeaderOpacity", `${opacity}`);
+  document.body.style.setProperty('--header-opacity', `${opacity}`);
+  sessionStorage.setItem("headerOpacity", `${opacity}`);
+}
+
 function checkHeaderInView() {
   const header = document.getElementById("animatedHeader");
-  let wasInViewport = isInViewport(header);
+  
+  applyHeaderOpacity();
 
-   // Set initial opacity based on sessionStorage
-   header.style.opacity = sessionStorage.getItem("headerOpacity") || "1";
+  let wasInViewport = isInViewport(header);
 
   window.addEventListener("scroll", () => {
     const isInViewNow = isInViewport(header);
     if (!isInViewNow && wasInViewport) {
       sessionStorage.removeItem("animatedHeaderAnimated");
       wasInViewport = false;
-      header.style.opacity = "0";
-      sessionStorage.setItem("headerOpacity", "0");
-      console.log("header not in view")
+      setHeaderOpacity(0);
     } else if (isInViewNow && !wasInViewport) {
       sessionStorage.setItem("animatedHeaderAnimated", "true");
       wasInViewport = true;
-      header.style.opacity = "1";
-      sessionStorage.setItem("headerOpacity", "1");
-      console.log("header in view")
-
+      setHeaderOpacity(1);
     }
   });
 }
 
-function resetHeaderOpacity() {
+function  resetHeaderOpacity() {
   const header = document.querySelector('header');
   if(header){
-    header.style.opacity = "1";
+    console.log("resetHeaderOpacity", `1`);
+    document.body.style.setProperty('--header-opacity', "1");
   }
 }
 
@@ -141,7 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
   animateOncePerSession("animatedNav", "animated-nav");
   checkHeaderInView();
   resetHeaderOpacity();
-
 });
 
 window.addEventListener("pageshow", (event) => {

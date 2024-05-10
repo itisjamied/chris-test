@@ -306,8 +306,9 @@ header {
 	padding-top:25px;
 	display: flex;
 	align-items: flex-start;
-	opacity: 0;
+	opacity: var(--header-opacity, 1);
 }
+
 header.internal {position: relative;}
 header img {margin-right:16px;}
 header .contacts {display: none;}
