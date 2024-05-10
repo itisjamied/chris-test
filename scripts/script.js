@@ -102,16 +102,46 @@ function animateOncePerSession(elementId, animationClass) {
   }
 }
 
+function handleAnimatedState(elementId) {
+  const element = document.getElementById(elementId);
+  const stateKey = `${elementId}State`;
+  const animationState = sessionStorage.getItem(stateKey);
+
+  if (element) {
+    // First load
+    if (!animationState) {
+      element.classList.add("animated-header");
+      sessionStorage.setItem(stateKey, "animated");
+    }
+  }
+}
+
+function setAnimatedState(elementId) {
+  const stateKey = `${elementId}State`;
+
+  sessionStorage.setItem(stateKey, "animated");
+}
+
+function resetAnimatedState(elementId) {
+  const element = document.getElementById(elementId);
+  const stateKey = `${elementId}State`;
+
+  element.classList.add("animated-header");
+  sessionStorage.removeItem(stateKey);
+}
+
 applyHeaderOpacity();
 
 function applyHeaderOpacity() {  
   // Set initial opacity based on sessionStorage
-  console.log("applyHeaderOpacity", sessionStorage.getItem("headerOpacity") || "1");
+  // console.log("applyHeaderOpacity", sessionStorage.getItem("headerOpacity") || "1");
+  return;
   document.body.style.setProperty('--header-opacity', sessionStorage.getItem("headerOpacity") || "1");
 }
 
 function setHeaderOpacity(opacity) {
-  console.log("setHeaderOpacity", `${opacity}`);
+  // console.log("setHeaderOpacity", `${opacity}`);
+  return;
   document.body.style.setProperty('--header-opacity', `${opacity}`);
   sessionStorage.setItem("headerOpacity", `${opacity}`);
 }
@@ -129,10 +159,12 @@ function checkHeaderInView() {
       sessionStorage.removeItem("animatedHeaderAnimated");
       wasInViewport = false;
       setHeaderOpacity(0);
+      resetAnimatedState("animatedHeader");
     } else if (isInViewNow && !wasInViewport) {
       sessionStorage.setItem("animatedHeaderAnimated", "true");
       wasInViewport = true;
       setHeaderOpacity(1);
+      setAnimatedState("animatedHeader");
     }
   });
 }
@@ -140,14 +172,14 @@ function checkHeaderInView() {
 function  resetHeaderOpacity() {
   const header = document.querySelector('header');
   if(header){
-    console.log("resetHeaderOpacity", `1`);
+    return;
     document.body.style.setProperty('--header-opacity', "1");
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   animateOnLoad();
-  animateOncePerSession("animatedHeader", "animated-header");
+  handleAnimatedState("animatedHeader");
   animateOncePerSession("animatedNav", "animated-nav");
   checkHeaderInView();
   resetHeaderOpacity();
@@ -163,7 +195,7 @@ window.addEventListener("pageshow", (event) => {
   }
   // always call initialization functions
   animateOnLoad();
-  animateOncePerSession("animatedHeader", "animated-header");
+  handleAnimatedState("animatedHeader");
   animateOncePerSession("animatedNav", "animated-nav");
   checkHeaderInView();
   resetHeaderOpacity();
