@@ -85,40 +85,48 @@ function animateOncePerSession(elementId, animationClass) {
 
 function animateHeader(elementId) {
   const element = document.getElementById(elementId);
-  const stateKey = `${elementId}State`;
-  const animationState = sessionStorage.getItem(stateKey);
+  const dontAnimate = sessionStorage.getItem("dontAnimateHeader");
 
   if (element) {
     // First load
-    // if (!animationState) {
+    if (dontAnimate != "true") {
       element.classList.add("animated-header");
-      // sessionStorage.setItem(stateKey, "animated");
-    // }
+    }
   }
 }
 
-function checkHeaderInView() {
-  const header = document.getElementById("animatedHeader");
-
-  let wasInViewport = isInViewport(header);
+function watchHeaderInView() {
+  checkHeaderInView();
 
   window.addEventListener("scroll", () => {
-    const isInViewNow = isInViewport(header);
-    if (!isInViewNow && wasInViewport) {
-      sessionStorage.removeItem("animatedHeaderAnimated");
-      wasInViewport = false;
-    } else if (isInViewNow && !wasInViewport) {
-      sessionStorage.setItem("animatedHeaderAnimated", "true");
-      wasInViewport = true;
-    }
+    checkHeaderInView();
   });
+}
+
+const header = document.getElementById("animatedHeader");
+let wasInViewport = isInViewport(header);
+let headerChecked = false; // boolean that's false so we can hit one of the conditions in checkHeaderInView
+
+function checkHeaderInView() {
+  const header = document.getElementById("animatedHeader");
+  const isInViewNow = isInViewport(header);
+  
+  if ((!isInViewNow && wasInViewport) || (!isInViewNow && !headerChecked)) {
+    sessionStorage.removeItem("dontAnimateHeader");
+    wasInViewport = false;
+    headerChecked = true;
+  } else if ((isInViewNow && !wasInViewport)||(isInViewNow && !headerChecked)) {
+    sessionStorage.setItem("dontAnimateHeader", "true");
+    wasInViewport = true;
+    headerChecked = true;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   animateOnLoad();
   animateHeader("animatedHeader");
   animateOncePerSession("animatedNav", "animated-nav");
-  checkHeaderInView();
+  watchHeaderInView();
 });
 
 window.addEventListener("pageshow", (event) => {
@@ -133,6 +141,6 @@ window.addEventListener("pageshow", (event) => {
   animateOnLoad();
   animateHeader("animatedHeader");
   animateOncePerSession("animatedNav", "animated-nav");
-  checkHeaderInView();
+  watchHeaderInView();
 });
 

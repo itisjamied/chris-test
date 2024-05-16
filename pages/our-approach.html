@@ -35,6 +35,12 @@ careers@valueform.io
 
 </head>
 <body>
+<script>
+	const dontAnimate = sessionStorage.getItem("dontAnimateHeader");
+	if (dontAnimate === 'true') {
+		document.body.style.setProperty('--header-opacity', "1");
+	}
+</script>
 <section class="wrapper">
 	<header class="container text-s internal" id="animatedHeader" >
 		<a href="../index.html">

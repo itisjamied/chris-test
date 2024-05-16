@@ -24,6 +24,12 @@ careers@valueform.io
 <!-- <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> -->
 </head>
 <body>
+<script>
+	const dontAnimate = sessionStorage.getItem("dontAnimateHeader");
+	if (dontAnimate === 'true') {
+		document.body.style.setProperty('--header-opacity', "1");
+	}
+</script>
 <section class="wrapper home">  
 	<header class="container text-s home " id="animatedHeader">
 		<img src="images/logo.svg" alt="ValueForm's Logo"/>

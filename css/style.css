@@ -306,7 +306,7 @@ header {
 	padding-top:25px;
 	display: flex;
 	align-items: flex-start;
-	opacity: var(--header-opacity, 1);
+	opacity: var(--header-opacity, 0);
 }
 
 header.internal {position: relative;}
