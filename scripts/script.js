@@ -49,29 +49,10 @@ function handleNavigation(fadeInUpElements) {
   });
 }
 
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const fadeInUpElements = Array.from(document.querySelectorAll(".fadeInUp:not(nav)"));
-//   handleNavigation(fadeInUpElements);
-
-//   setTimeout(() => {
-//     fadeInUpElements.forEach((element, index) => {
-//       if (isInViewport(element)) {
-//         element.classList.add("animated");
-//       } else {
-//         element.style.visibility = "visible";
-//       }
-//       element.style.animationDelay = `${index * 600}ms`;
-//     });
-//   }, 200); 
-// });
-
 function animateOnLoad() {
   const fadeInUpElements = Array.from(
     document.querySelectorAll(".fadeInUp:not(nav)")
   );
-
 
   setTimeout(() => {
     let viewportIndex = 0;  
@@ -102,54 +83,22 @@ function animateOncePerSession(elementId, animationClass) {
   }
 }
 
-function handleAnimatedState(elementId) {
+function animateHeader(elementId) {
   const element = document.getElementById(elementId);
   const stateKey = `${elementId}State`;
   const animationState = sessionStorage.getItem(stateKey);
 
   if (element) {
     // First load
-    if (!animationState) {
+    // if (!animationState) {
       element.classList.add("animated-header");
-      sessionStorage.setItem(stateKey, "animated");
-    }
+      // sessionStorage.setItem(stateKey, "animated");
+    // }
   }
-}
-
-function setAnimatedState(elementId) {
-  const stateKey = `${elementId}State`;
-
-  sessionStorage.setItem(stateKey, "animated");
-}
-
-function resetAnimatedState(elementId) {
-  const element = document.getElementById(elementId);
-  const stateKey = `${elementId}State`;
-
-  element.classList.add("animated-header");
-  sessionStorage.removeItem(stateKey);
-}
-
-applyHeaderOpacity();
-
-function applyHeaderOpacity() {  
-  // Set initial opacity based on sessionStorage
-  // console.log("applyHeaderOpacity", sessionStorage.getItem("headerOpacity") || "1");
-  return;
-  document.body.style.setProperty('--header-opacity', sessionStorage.getItem("headerOpacity") || "1");
-}
-
-function setHeaderOpacity(opacity) {
-  // console.log("setHeaderOpacity", `${opacity}`);
-  return;
-  document.body.style.setProperty('--header-opacity', `${opacity}`);
-  sessionStorage.setItem("headerOpacity", `${opacity}`);
 }
 
 function checkHeaderInView() {
   const header = document.getElementById("animatedHeader");
-  
-  applyHeaderOpacity();
 
   let wasInViewport = isInViewport(header);
 
@@ -158,31 +107,18 @@ function checkHeaderInView() {
     if (!isInViewNow && wasInViewport) {
       sessionStorage.removeItem("animatedHeaderAnimated");
       wasInViewport = false;
-      setHeaderOpacity(0);
-      resetAnimatedState("animatedHeader");
     } else if (isInViewNow && !wasInViewport) {
       sessionStorage.setItem("animatedHeaderAnimated", "true");
       wasInViewport = true;
-      setHeaderOpacity(1);
-      setAnimatedState("animatedHeader");
     }
   });
 }
 
-function  resetHeaderOpacity() {
-  const header = document.querySelector('header');
-  if(header){
-    return;
-    document.body.style.setProperty('--header-opacity', "1");
-  }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   animateOnLoad();
-  handleAnimatedState("animatedHeader");
+  animateHeader("animatedHeader");
   animateOncePerSession("animatedNav", "animated-nav");
   checkHeaderInView();
-  resetHeaderOpacity();
 });
 
 window.addEventListener("pageshow", (event) => {
@@ -195,9 +131,8 @@ window.addEventListener("pageshow", (event) => {
   }
   // always call initialization functions
   animateOnLoad();
-  handleAnimatedState("animatedHeader");
+  animateHeader("animatedHeader");
   animateOncePerSession("animatedNav", "animated-nav");
   checkHeaderInView();
-  resetHeaderOpacity();
 });
 
