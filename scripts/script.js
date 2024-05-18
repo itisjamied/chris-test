@@ -49,29 +49,10 @@ function handleNavigation(fadeInUpElements) {
   });
 }
 
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const fadeInUpElements = Array.from(document.querySelectorAll(".fadeInUp:not(nav)"));
-//   handleNavigation(fadeInUpElements);
-
-//   setTimeout(() => {
-//     fadeInUpElements.forEach((element, index) => {
-//       if (isInViewport(element)) {
-//         element.classList.add("animated");
-//       } else {
-//         element.style.visibility = "visible";
-//       }
-//       element.style.animationDelay = `${index * 600}ms`;
-//     });
-//   }, 200); 
-// });
-
 function animateOnLoad() {
   const fadeInUpElements = Array.from(
     document.querySelectorAll(".fadeInUp:not(nav)")
   );
-
 
   setTimeout(() => {
     let viewportIndex = 0;  
@@ -102,46 +83,50 @@ function animateOncePerSession(elementId, animationClass) {
   }
 }
 
-function checkHeaderInView() {
-  const header = document.getElementById("animatedHeader");
-  let wasInViewport = isInViewport(header);
+function animateHeader(elementId) {
+  const element = document.getElementById(elementId);
+  const dontAnimate = sessionStorage.getItem("dontAnimateHeader");
 
-   // Set initial opacity based on sessionStorage
-   header.style.opacity = sessionStorage.getItem("headerOpacity") || "1";
+  if (element) {
+    // First load
+    if (dontAnimate != "true") {
+      element.classList.add("animated-header");
+    }
+  }
+}
+
+function watchHeaderInView() {
+  checkHeaderInView();
 
   window.addEventListener("scroll", () => {
-    const isInViewNow = isInViewport(header);
-    if (!isInViewNow && wasInViewport) {
-      sessionStorage.removeItem("animatedHeaderAnimated");
-      wasInViewport = false;
-      header.style.opacity = "0";
-      sessionStorage.setItem("headerOpacity", "0");
-      console.log("header not in view")
-    } else if (isInViewNow && !wasInViewport) {
-      sessionStorage.setItem("animatedHeaderAnimated", "true");
-      wasInViewport = true;
-      header.style.opacity = "1";
-      sessionStorage.setItem("headerOpacity", "1");
-      console.log("header in view")
-
-    }
+    checkHeaderInView();
   });
 }
 
-function resetHeaderOpacity() {
-  const header = document.querySelector('header');
-  if(header){
-    header.style.opacity = "1";
+const header = document.getElementById("animatedHeader");
+let wasInViewport = isInViewport(header);
+let headerChecked = false; // boolean that's false so we can hit one of the conditions in checkHeaderInView
+
+function checkHeaderInView() {
+  const header = document.getElementById("animatedHeader");
+  const isInViewNow = isInViewport(header);
+  
+  if ((!isInViewNow && wasInViewport) || (!isInViewNow && !headerChecked)) {
+    sessionStorage.removeItem("dontAnimateHeader");
+    wasInViewport = false;
+    headerChecked = true;
+  } else if ((isInViewNow && !wasInViewport)||(isInViewNow && !headerChecked)) {
+    sessionStorage.setItem("dontAnimateHeader", "true");
+    wasInViewport = true;
+    headerChecked = true;
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   animateOnLoad();
-  animateOncePerSession("animatedHeader", "animated-header");
+  animateHeader("animatedHeader");
   animateOncePerSession("animatedNav", "animated-nav");
-  checkHeaderInView();
-  resetHeaderOpacity();
-
+  watchHeaderInView();
 });
 
 window.addEventListener("pageshow", (event) => {
@@ -154,9 +139,8 @@ window.addEventListener("pageshow", (event) => {
   }
   // always call initialization functions
   animateOnLoad();
-  animateOncePerSession("animatedHeader", "animated-header");
+  animateHeader("animatedHeader");
   animateOncePerSession("animatedNav", "animated-nav");
-  checkHeaderInView();
-  resetHeaderOpacity();
+  watchHeaderInView();
 });
 

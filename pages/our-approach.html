@@ -32,23 +32,15 @@ careers@valueform.io
         }, 10);
     });
     </script>
-	<script>
-		if ('serviceWorker' in navigator) {
-	  window.addEventListener('load', function() {
-		navigator.serviceWorker.register('../service-worker.js').then(function(registration) {
-		  // Registration was successful
-		  console.log('ServiceWorker registration successful with scope: ', registration.scope);
-		}, function(err) {
-		  // Registration failed
-		  console.log('ServiceWorker registration failed: ', err);
-		});
-	  });
-	}
-	
-	</script>
 
 </head>
 <body>
+<script>
+	const dontAnimate = sessionStorage.getItem("dontAnimateHeader");
+	if (dontAnimate === 'true') {
+		document.body.style.setProperty('--header-opacity', "1");
+	}
+</script>
 <section class="wrapper">
 	<header class="container text-s internal" id="animatedHeader" >
 		<a href="../index.html">
