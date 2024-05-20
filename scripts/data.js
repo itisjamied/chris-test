@@ -16,6 +16,13 @@ function updateContent() {
       logoSrc: "images/logo.svg"
   };
 
+  const cssData = {
+    '--almostblack': '#020202',
+    '--darkgrey': '#404040',
+    '--nearwhite': '#BEBEBE',
+    '--white': '#ffffff'
+};
+
   // update text content
   const textElements = document.querySelectorAll("[data-text]");
   textElements.forEach((element) => {
@@ -33,6 +40,12 @@ function updateContent() {
           element.setAttribute("src", srcData[key]);
       }
   });
+
+  // update CSS variables
+  const root = document.documentElement;
+  for (const [key, value] of Object.entries(cssData)) {
+      root.style.setProperty(key, value);
+  }
   
 }
 
