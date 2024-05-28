@@ -758,10 +758,10 @@ nav.fadeInUp {
 	animation-duration: 600ms;
 }
 
+.text_fix1, .text_fix2 {
+	z-index: 0 !important; 
+}
 
-
-
-
-
-
-
+.text_fix2 {
+	-webkit-text-stroke: 2px var(--darkgrey) !important;
+}
