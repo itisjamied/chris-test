@@ -1,11 +1,11 @@
 function updateContent() {
   const textData = {
-    headerTitle: "How we do it",
+    // headerTitle: "How we do it",
     companyName: "ValueForm",
     serviceDesign: "service design",
     productDesign: "product design",
     softwareEngineering: "software engineering",
-    contactsTitle: "Contacts",
+    // contactsTitle: "Contacts",
     newBusinessEmail: "newbusiness@valueform.io",
     pressEmail: "press@valueform.io",
     careersEmail: "careers@valueform.io",
