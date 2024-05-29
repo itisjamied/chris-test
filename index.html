@@ -24,7 +24,7 @@ careers@valueform.io
 <!-- <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> -->
 </head>
 <body>
-	<script src="./scripts/data.js"></script>
+	<script src="./scripts/data.js" async></script>
 <script>
 	const dontAnimate = sessionStorage.getItem("dontAnimateHeader");
 	if (dontAnimate === 'true') {
@@ -32,7 +32,7 @@ careers@valueform.io
 	}
 </script>
 <section class="wrapper home">  
-	<!-- <header class="container text-s home " id="animatedHeader">
+	<header class="container text-s home " id="animatedHeader">
 		<img src="images/logo.svg" alt="ValueForm's Logo"/>
 	  
 		<div class="how-we desktop-col-3 tablet-col-3">
@@ -48,7 +48,7 @@ careers@valueform.io
 			 <a href="mailto:careers@valueform.io">careers@valueform.io</a><br />
 		  </p>
 	  </div>
-	</header> -->
+	</header>
 
 	<header class="container text-s home " id="animatedHeader">
 		<img src="images/logo.svg" alt="ValueForm's Logo" data-src="logoSrc"/>
@@ -60,7 +60,7 @@ careers@valueform.io
 		</div>
 	
 		<div class="contacts desktop-col-3-end tablet-col-3-end">
-			<h4 data-text="contactsTitle">Contacts</h4>
+			<h4 data-text="contactsTitle">Loading...</h4>
 			<p>
 				<a href="mailto:newbusiness@valueform.io" data-text="newBusinessEmail">newbusiness@valueform.io</a><br />
 				<a href="mailto:press@valueform.io" data-text="pressEmail">press@valueform.io</a><br />
