@@ -15,6 +15,7 @@ function updateContent() {
         imgSrc: "../images/lipp-pross-photo.png",
         bio: `Christopher is an accomplished product and design leader, recognized for his track record guiding teams at both agencies and large incumbents. His expertise has been pivotal in tackling complex business challenges, collaborating with the likes of algorithmic trading firms, governments, healthcare advocacy groups, and CPG brands. His broad experience fuels his ability to draw unique parallels across industries, consistently generating outsized outcomes. His contributions have resulted in innovative digital products, new business models, and the strategic redesign of organizations. <a href="../images/launch-letter.pdf" target="_blank">Read why Chris founded ValueForm.</a>`,
         clients: {
+          title: "Select Clients:",
           category01: {
             name: "Finance",
             list: "Goldman Sachs, Jane Street, MetLife, BNY Mellon",
@@ -44,7 +45,7 @@ function updateContent() {
     },
   };
 
-  // Helper function to get nested value from textData
+  // get nested value from textData
   function getNestedValue(obj, key) {
     return key.split(".").reduce((o, i) => (o ? o[i] : null), obj);
   }
