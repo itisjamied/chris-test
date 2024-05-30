@@ -1,5 +1,11 @@
 // main.js
-import { textData } from "./data.js";
+import { generalData } from "./data.js";
+import { teamData } from "./team.js";
+
+const textData = {
+  ...generalData,
+  team: teamData,
+};
 
 function getNestedValue(obj, key) {
   return key.split(".").reduce((o, i) => (o ? o[i] : null), obj);
