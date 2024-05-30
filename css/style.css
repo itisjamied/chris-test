@@ -1205,3 +1205,6 @@ nav.fadeInUp {
 .member-top {
   border-top: 1px solid var(--darkgrey) !important; /* You can customize the border style, width, and color */
 }
+.no-underline{
+  text-decoration: none;
+}
