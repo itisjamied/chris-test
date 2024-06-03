@@ -1,12 +1,12 @@
 // main.js
 import { generalData } from "./data.js";
 import { teamData } from "./team.js";
-import { footer } from "./footer.js";
+// import { footer } from "./footer.js";
 
 const textData = {
   ...generalData,
   team: teamData,
-  footer,
+  // footer,
 };
 
 function getNestedValue(obj, key) {
