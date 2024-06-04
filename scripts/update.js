@@ -1,11 +1,13 @@
 // main.js
 import { generalData } from "./data/data.js";
 import { teamData } from "./data/team.js";
+import { introBlock } from "./data/approachIntroBlock.js";
 // import { footer } from "./footer.js";
 
 const textData = {
   ...generalData,
   team: teamData,
+  ...introBlock,
   // footer,
 };
 
@@ -15,24 +17,31 @@ function getNestedValue(obj, key) {
 
 function updateContent() {
   const textElements = document.querySelectorAll("[key]");
+
   textElements.forEach((element) => {
     const key = element.getAttribute("key");
     const value = getNestedValue(textData, key);
+
     if (value) {
-      if (element.tagName.toLowerCase() === "img") {
-        element.src = value;
-      } else if (
-        element.tagName.toLowerCase() === "a" &&
-        element.hasAttribute("data-display-key")
-      ) {
-        element.href = value;
-        const displayKey = element.getAttribute("data-display-key");
-        const displayValue = getNestedValue(textData, displayKey);
-        if (displayValue) {
-          element.textContent = displayValue;
-        }
-      } else {
-        element.innerHTML = value;
+      switch (element.tagName.toLowerCase()) {
+        case "img":
+          element.src = value;
+          break;
+
+        case "a":
+          if (element.hasAttribute("data-display-key")) {
+            element.href = value;
+            const displayKey = element.getAttribute("data-display-key");
+            const displayValue = getNestedValue(textData, displayKey);
+            if (displayValue) {
+              element.textContent = displayValue;
+            }
+          }
+          break;
+
+        default:
+          element.innerHTML = value;
+          break;
       }
     }
   });
@@ -91,7 +100,15 @@ function updateContent() {
     memberWrapper.appendChild(contactContainer);
     mainContainer.appendChild(memberWrapper);
   });
-
 }
 
 window.onload = updateContent;
+
+ // Ensure Lottie player is loaded before setting src
+ const lottiePlayer = document.querySelector("dotlottie-player");
+ if (lottiePlayer) {
+   const lottieSrc = getNestedValue(textData, "approach.lottieSrc");
+   if (lottieSrc) {
+     lottiePlayer.setAttribute("src", lottieSrc);
+   }
+ }
