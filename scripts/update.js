@@ -1,6 +1,6 @@
 // main.js
-import { generalData } from "./data.js";
-import { teamData } from "./team.js";
+import { generalData } from "./data/data.js";
+import { teamData } from "./data/team.js";
 // import { footer } from "./footer.js";
 
 const textData = {
@@ -92,42 +92,6 @@ function updateContent() {
     mainContainer.appendChild(memberWrapper);
   });
 
-  // function updateFooter() {
-  //   const footer = document.querySelector("footer");
-
-  //   // Update logo
-  //   const logos = footer.querySelectorAll('a[href="../index.html"] img');
-  //   logos.forEach((logo) => {
-  //     logo.src = textData.footer.logo.src;
-  //     logo.alt = textData.footer.logo.alt;
-  //   });
-
-  //   // Update address
-  //   const addressContainer = footer.querySelector(".address");
-  //   addressContainer.querySelector("h4").textContent =
-  //     textData.footer.address.title;
-  //   addressContainer.querySelector("p").innerHTML =
-  //     textData.footer.address.lines.join("<br />");
-
-  //   // Update copyright
-  //   const copyrightContainer = footer.querySelector(".copyright");
-  //   copyrightContainer.querySelector("h4").textContent =
-  //     textData.footer.copyright.title;
-  //   copyrightContainer.querySelector(
-  //     "p"
-  //   ).innerHTML = `&copy;<br /> Copyright ${textData.footer.copyright.year}, ${textData.footer.copyright.company}`;
-
-  //   // Update contacts
-  //   const contactsContainer = footer.querySelector(".contacts");
-  //   contactsContainer.querySelector("h4").textContent =
-  //     textData.footer.contacts.title;
-  //   contactsContainer.querySelector("p").innerHTML =
-  //     textData.footer.contacts.emails
-  //       .map(
-  //         (email) => `<a href="mailto:${email.address}">${email.display}</a>`
-  //       )
-  //       .join("<br />");
-  // }
 }
 
 window.onload = updateContent;
