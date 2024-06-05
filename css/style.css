@@ -758,10 +758,19 @@ nav.fadeInUp {
 	animation-duration: 600ms;
 }
 
-.text_fix1, .text_fix2 {
+/* .text_fix1, .text_fix2 {
 	z-index: 0 !important; 
 }
 
 .text_fix2 {
 	-webkit-text-stroke: 2px var(--darkgrey) !important;
+} */
+
+.white-text-shadow {
+  text-shadow: 1px 0 0 var(--darkgrey),
+    -1px 0 0 var(--darkgrey) 0 1px 0 var(--darkgrey),
+    0 -1px 0 var(--darkgrey) 1px 1px 0 var(--darkgrey),
+    -1px -1px 0 var(--darkgrey) -1px 1px 0 var(--darkgrey) 1px -1px 0
+      var(--darkgrey);
+  -webkit-text-stroke: 0;
 }
