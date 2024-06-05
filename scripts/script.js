@@ -144,3 +144,21 @@ window.addEventListener("pageshow", (event) => {
   watchHeaderInView();
 });
 
+
+function isNotMacOS() {
+  return !window.navigator.platform.includes("Mac");
+}
+
+function applyWhiteTextShadow() {
+  if (isNotMacOS()) {
+    var elements = document.querySelectorAll(".text-jumbo");
+    console.log("Elements selected:", elements);
+    elements.forEach(function (element) {
+      element.classList.add("white-text-shadow");
+      console.log("Added white-text-shadow to:", element);
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", applyWhiteTextShadow);
+
