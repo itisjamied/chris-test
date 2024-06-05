@@ -1,13 +1,13 @@
 import { generalData } from "./data/data.js";
 import { teamData } from "./data/team.js";
 import { introBlock } from "./data/approachIntroBlock.js";
-// import { footer } from "./footer.js";
+import { footer as footerData } from "./data/footer.js"; // Import the footer data
 
 const textData = {
   ...generalData,
   team: teamData,
   ...introBlock,
-  // footer,
+  footer: footerData,
 };
 
 function getNestedValue(obj, key) {
@@ -48,6 +48,7 @@ function TextElements() {
 
 function TeamMembers() {
   const mainContainer = document.querySelector(".main-container");
+  if (!textData.team || !mainContainer) return;
 
   Object.keys(textData.team).forEach((memberKey, index) => {
     const member = textData.team[memberKey];
@@ -102,9 +103,53 @@ function TeamMembers() {
   });
 }
 
+function handleFooter() {
+  console.log("I got in here")
+  const footerContainer = document.querySelector("footer");
+  if (footerContainer) {
+    const footerData = textData.footer;
+
+    footerContainer.innerHTML = `
+      <img src="${footerData.logo.src}" alt="${footerData.logo.alt}" ondblclick="document.getElementById('producer-tag').play();" />
+
+      <div class="address desktop-col-3 tablet-col-2">
+        <h4>${footerData.address.title}</h4>
+        <p>
+          ${footerData.address.lines.l1}<br />
+          ${footerData.address.lines.l2}<br />
+          ${footerData.address.lines.l3}
+        </p>
+      </div> 
+
+      <div class="copyright desktop-col-3-mid tablet-col-2-mid">
+        <h4>${footerData.copyright.title}</h4>
+        <p>&copy;<br /> 
+          Copyright ${footerData.copyright.year}, ${footerData.copyright.company}
+        </p> 
+      </div>
+
+      <div class="contacts desktop-col-3-end tablet-col-3-end">
+        <h4>${footerData.contacts.title}</h4>
+        <p>
+          <a href="mailto:${footerData.contacts.emails.business.address}">${footerData.contacts.emails.business.display}</a><br />
+          <a href="mailto:${footerData.contacts.emails.press.address}">${footerData.contacts.emails.press.display}</a><br />
+          <a href="mailto:${footerData.contacts.emails.careers.address}">${footerData.contacts.emails.careers.display}</a><br />
+        </p>
+      </div>
+
+      <audio id="producer-tag">
+        <source src="images/D1-Whoosh.mp3" type="audio/mpeg">
+      </audio>
+
+      <img src="${footerData.logo.src}" alt="${footerData.logo.alt}" ondblclick="document.getElementById('producer-tag').play();" />
+    `;
+  }
+}
+
 function updateContent() {
   TextElements();
   TeamMembers();
+  handleFooter();
 }
 
 window.onload = updateContent;
