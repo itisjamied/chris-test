@@ -1,4 +1,3 @@
-// main.js
 import { generalData } from "./data/data.js";
 import { teamData } from "./data/team.js";
 import { introBlock } from "./data/approachIntroBlock.js";
@@ -15,7 +14,7 @@ function getNestedValue(obj, key) {
   return key.split(".").reduce((o, i) => (o ? o[i] : null), obj);
 }
 
-function updateContent() {
+function TextElements() {
   const textElements = document.querySelectorAll("[key]");
 
   textElements.forEach((element) => {
@@ -45,8 +44,9 @@ function updateContent() {
       }
     }
   });
+}
 
-  // handle team members separately
+function TeamMembers() {
   const mainContainer = document.querySelector(".main-container");
 
   Object.keys(textData.team).forEach((memberKey, index) => {
@@ -102,13 +102,23 @@ function updateContent() {
   });
 }
 
+function updateContent() {
+  TextElements();
+  TeamMembers();
+}
+
 window.onload = updateContent;
 
  // Ensure Lottie player is loaded before setting src
- const lottiePlayer = document.querySelector("dotlottie-player");
- if (lottiePlayer) {
-   const lottieSrc = getNestedValue(textData, "approach.lottieSrc");
-   if (lottieSrc) {
-     lottiePlayer.setAttribute("src", lottieSrc);
-   }
- }
+const lottiePlayer = document.querySelector("dotlottie-player");
+if (lottiePlayer) {
+  const lottieSrc = getNestedValue(textData, "approach.lottieSrc");
+  const lottieSpeed = getNestedValue(textData, "approach.lottieSpeed");
+
+  if (lottieSrc) {
+    lottiePlayer.setAttribute("src", lottieSrc);
+  }
+  if (lottieSpeed) {
+    lottiePlayer.setAttribute("speed", lottieSpeed);
+  }
+}
