@@ -145,12 +145,17 @@ window.addEventListener("pageshow", (event) => {
 });
 
 
-function isNotMacOS() {
-  return !window.navigator.platform.includes("Mac");
+function isNotAppleProduct() {
+  var platform = window.navigator.platform;
+  var userAgent = window.navigator.userAgent;
+  return !(
+    /Mac|iPad|iPhone|iPod/.test(platform) || 
+    /Mac|iPad|iPhone|iPod/.test(userAgent)
+  );
 }
 
 function applyWhiteTextShadow() {
-  if (isNotMacOS()) {
+  if (isNotAppleProduct()) {
     var elements = document.querySelectorAll(".text-jumbo");
     console.log("Elements selected:", elements);
     elements.forEach(function (element) {
@@ -159,6 +164,7 @@ function applyWhiteTextShadow() {
     });
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", applyWhiteTextShadow);
 
