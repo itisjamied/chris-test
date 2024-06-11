@@ -2,6 +2,7 @@ import blockContent from './blockContent'
 import category from './category'
 import post from './post'
 import author from './author'
-// import team from '../../scripts/data/team2'
+import team from './team3'
+import teamMember from '../../scripts/data/teamMember'
 
-export const schemaTypes = [post, author, category, blockContent]
+export const schemaTypes = [post, author, category, blockContent, team, teamMember]

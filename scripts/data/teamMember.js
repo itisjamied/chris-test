@@ -1,7 +1,7 @@
+// schemas/teamMember.js
+import { defineField, defineType } from 'sanity'
 
-import {defineField, defineType} from 'sanity'
-
-const teamMember = defineType({
+export default defineType({
   name: 'teamMember',
   title: 'Team Member',
   type: 'document',
@@ -105,18 +105,4 @@ const teamMember = defineType({
       media: 'imgSrc',
     },
   },
-})
-
-export default defineType({
-  name: 'team',
-  title: 'Team',
-  type: 'document',
-  fields: [
-    defineField({
-      name: 'members',
-      title: 'Team Members',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'teamMember'}}],
-    }),
-  ],
 })
