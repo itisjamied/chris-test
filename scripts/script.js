@@ -90,6 +90,7 @@ function animateHeader(elementId) {
 
   if (element) {
     // First load
+
     if (dontAnimate != "true") {
       element.classList.add("animated-header");
     }
