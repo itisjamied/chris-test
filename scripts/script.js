@@ -20,31 +20,32 @@ function handleNavigation(fadeInUpElements) {
     if (anchor.classList.contains("disabled")) return;
 
     anchor.addEventListener("click", (e) => {
-
-      const isPureAnchor = anchor.getAttribute('href').startsWith('#') && anchor.host === window.location.host && anchor.pathname === window.location.pathname;
+      const isPureAnchor =
+        anchor.getAttribute("href").startsWith("#") &&
+        anchor.host === window.location.host &&
+        anchor.pathname === window.location.pathname;
 
       if (isPureAnchor) {
         return;
       } else {
+        e.preventDefault();
+        const targetUrl = anchor.href;
+        let delayCounter = 0;
 
-      e.preventDefault();
-      const targetUrl = anchor.href;
-      let delayCounter = 0;
+        fadeInUpElements
+          .filter(isInViewport)
+          .reverse()
+          .forEach((element, index) => {
+            element.classList.replace("fadeInUp", "fadeOutDown");
+            element.style.animationDelay = `${index * 600}ms`;
+            delayCounter++;
+          });
 
-      fadeInUpElements
-        .filter(isInViewport)
-        .reverse()
-        .forEach((element, index) => {
-          element.classList.replace("fadeInUp", "fadeOutDown");
-          element.style.animationDelay = `${index * 600}ms`;
-          delayCounter++;
-        });
-
-      setTimeout(
-        () => (window.location.href = targetUrl),
-        delayCounter * 600 + 500
-      );
-    }
+        setTimeout(
+          () => (window.location.href = targetUrl),
+          delayCounter * 600 + 500
+        );
+      }
     });
   });
 }
@@ -55,12 +56,12 @@ function animateOnLoad() {
   );
 
   setTimeout(() => {
-    let viewportIndex = 0;  
+    let viewportIndex = 0;
     fadeInUpElements.forEach((element) => {
       if (isInViewport(element)) {
         element.style.animationDelay = `${viewportIndex * 600}ms`;
         element.classList.add("animated");
-        viewportIndex++;  
+        viewportIndex++;
       } else {
         element.style.visibility = "visible";
       }
@@ -110,12 +111,15 @@ let headerChecked = false; // boolean that's false so we can hit one of the cond
 function checkHeaderInView() {
   const header = document.getElementById("animatedHeader");
   const isInViewNow = isInViewport(header);
-  
+
   if ((!isInViewNow && wasInViewport) || (!isInViewNow && !headerChecked)) {
     sessionStorage.removeItem("dontAnimateHeader");
     wasInViewport = false;
     headerChecked = true;
-  } else if ((isInViewNow && !wasInViewport)||(isInViewNow && !headerChecked)) {
+  } else if (
+    (isInViewNow && !wasInViewport) ||
+    (isInViewNow && !headerChecked)
+  ) {
     sessionStorage.setItem("dontAnimateHeader", "true");
     wasInViewport = true;
     headerChecked = true;
@@ -133,7 +137,7 @@ window.addEventListener("pageshow", (event) => {
   if (event.persisted) {
     ("Page was loaded from the cache");
     // re-initialize animations or reset styles here
-    document.querySelectorAll(".fadeOutDown").forEach(el => {
+    document.querySelectorAll(".fadeOutDown").forEach((el) => {
       el.classList.replace("fadeOutDown", "fadeInUp");
     });
   }
@@ -144,20 +148,39 @@ window.addEventListener("pageshow", (event) => {
   watchHeaderInView();
 });
 
-
 function isNotAppleProduct() {
   var platform = window.navigator.platform;
   var userAgent = window.navigator.userAgent;
   return !(
-    /Mac|iPad|iPhone|iPod/.test(platform) || 
+    /Mac|iPad|iPhone|iPod/.test(platform) ||
     /Mac|iPad|iPhone|iPod/.test(userAgent)
   );
 }
+
+// function applyWhiteTextShadow() {
+//   if (isNotAppleProduct()) {
+//     var elements = document.querySelectorAll(".text-jumbo");
+//     console.log("Elements selected:", elements);
+//     elements.forEach(function (element) {
+//       element.classList.add("white-text-shadow");
+//       console.log("Added white-text-shadow to:", element);
+//     });
+//   }
+// }
 
 function applyWhiteTextShadow() {
   if (isNotAppleProduct()) {
     var elements = document.querySelectorAll(".text-jumbo");
     console.log("Elements selected:", elements);
+
+    // If there are more than one elements with class "text-jumbo"
+    if (elements.length > 1) {
+      // Remove the top element
+      elements[0].remove();
+      console.log("Top element removed:", elements[0]);
+    }
+
+    // Apply class to the remaining element
     elements.forEach(function (element) {
       element.classList.add("white-text-shadow");
       console.log("Added white-text-shadow to:", element);
@@ -165,6 +188,4 @@ function applyWhiteTextShadow() {
   }
 }
 
-
 document.addEventListener("DOMContentLoaded", applyWhiteTextShadow);
-
