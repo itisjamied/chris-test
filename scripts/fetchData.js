@@ -15,17 +15,48 @@ function urlFor(source) {
 }
 
 // Query to fetch team members
-const query = '*[_type == "teamMember"] {title, name, bio, imgSrc}';
+const query = `*[_type == "teamMember"] {
+  "title": title,
+  "name": name,
+  "imgSrc": imgSrc.asset->url,
+  "bio": bio,
+  "clients": clients{
+    "title": title,
+    "categories": categories[] {
+      "name": name,
+      "list": list
+    }
+  },
+  "contact": contact {
+    "methods": methods[] {
+      "name": name,
+      "link": link,
+      "display": display
+    }
+  }
+}`;
 
 client
   .fetch(query)
   .then((teamMembers) => {
-    const teamMembersWithImageUrls = teamMembers.map((member) => ({
-      ...member,
-      imgSrc: member.imgSrc ? urlFor(member.imgSrc) : null,
-    }));
+    // Transform the clients' categories to ensure they are strings
+    const teamMembersWithTransformedClients = teamMembers.map((member) => {
+      if (member.clients && member.clients.categories) {
+        member.clients.categories = member.clients.categories.map(
+          (category) => ({
+            ...category,
+            name: category.name ? String(category.name) : null,
+            list: category.list ? String(category.list) : null,
+          })
+        );
+      }
+      return member;
+    });
 
-    console.log("Team Members:", teamMembersWithImageUrls);
+    console.log(
+      "Team Members:",
+      JSON.stringify(teamMembersWithTransformedClients, null, 2)
+    );
   })
   .catch((err) => {
     console.error("Error fetching team members:", err);
