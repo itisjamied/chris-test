@@ -1,5 +1,7 @@
 import { generalData } from "./data/data.js";
-import { teamData } from "./data/team.js";
+
+// const teamData = require("./export.js");
+import { teamData } from "./export.js";
 import { introBlock } from "./data/approachIntroBlock.js";
 import { footer as footerData } from "./data/footer.js"; // Import the footer data
 
@@ -104,7 +106,7 @@ function TeamMembers() {
 }
 
 function handleFooter() {
-  console.log("I got in here")
+  console.log("I got in here");
   const footerContainer = document.querySelector("footer");
   if (footerContainer) {
     const footerData = textData.footer;
@@ -154,7 +156,7 @@ function updateContent() {
 
 window.onload = updateContent;
 
- // Ensure Lottie player is loaded before setting src
+// Ensure Lottie player is loaded before setting src
 const lottiePlayer = document.querySelector("dotlottie-player");
 if (lottiePlayer) {
   const lottieSrc = getNestedValue(textData, "approach.lottieSrc");

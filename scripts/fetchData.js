@@ -1,3 +1,5 @@
+// fetchTeamData.js
+
 const { createClient } = require("@sanity/client");
 
 const client = createClient({
@@ -29,9 +31,10 @@ const query = `*[_type == "teamMember"] {
   }
 }`;
 
-client
-  .fetch(query)
-  .then((teamMembers) => {
+async function fetchTeamData() {
+  try {
+    const teamMembers = await client.fetch(query);
+
     // Transform the fetched data into the required format
     const teamData = {};
 
@@ -82,8 +85,11 @@ client
       };
     });
 
-    console.log("teamData:", JSON.stringify(teamData, null, 2));
-  })
-  .catch((err) => {
+    return teamData;
+  } catch (err) {
     console.error("Error fetching team members:", err);
-  });
+    throw err;
+  }
+}
+
+module.exports = fetchTeamData;
