@@ -1,5 +1,4 @@
 const { createClient } = require("@sanity/client");
-const imageUrlBuilder = require("@sanity/image-url");
 
 const client = createClient({
   projectId: "wfwxz1rq", // your project ID
@@ -7,12 +6,6 @@ const client = createClient({
   apiVersion: "2022-06-01", // use a specific API version
   useCdn: false, // `false` if you want to ensure fresh data
 });
-
-const builder = imageUrlBuilder(client);
-
-function urlFor(source) {
-  return builder.image(source).url();
-}
 
 // Query to fetch team members
 const query = `*[_type == "teamMember"] {
@@ -40,11 +33,11 @@ client
   .fetch(query)
   .then((teamMembers) => {
     // Transform the fetched data into the required format
-    const transformedTeamData = {};
+    const teamData = {};
 
     teamMembers.forEach((member, index) => {
       const memberId = `member${String(index + 1).padStart(2, "0")}`;
-      transformedTeamData[memberId] = {
+      teamData[memberId] = {
         name: member.name,
         title: member.title,
         imgSrc: member.imgSrc || "", // Provide a default value if imgSrc is null
@@ -89,10 +82,7 @@ client
       };
     });
 
-    console.log(
-      "Transformed Team Data:",
-      JSON.stringify(transformedTeamData, null, 2)
-    );
+    console.log("teamData:", JSON.stringify(teamData, null, 2));
   })
   .catch((err) => {
     console.error("Error fetching team members:", err);
