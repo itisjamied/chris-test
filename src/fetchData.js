@@ -1,6 +1,8 @@
 // fetchTeamData.js
 
-const { createClient } = require("@sanity/client");
+// const { createClient } = require("@sanity/client");
+import { createClient } from "@sanity/client";
+
 
 const client = createClient({
   projectId: "wfwxz1rq", // your project ID
@@ -92,4 +94,5 @@ async function fetchTeamData() {
   }
 }
 
-module.exports = fetchTeamData;
+// module.exports = fetchTeamData;
+export default fetchTeamData;

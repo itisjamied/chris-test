@@ -1,6 +1,7 @@
 // index.js
 
-const fetchTeamData = require("./fetchData");
+// const fetchTeamData = require("./fetchData");
+import fetchTeamData from "./fetchData.js"
 
 (async () => {
   try {
@@ -8,10 +9,13 @@ const fetchTeamData = require("./fetchData");
     console.log("teamData:", JSON.stringify(teamData, null, 2));
 
     // Export the fetched data
-    module.exports = {
-      teamData,
-    };
+    // module.exports = {
+    //   teamData,
+    // };
   } catch (err) {
     console.error("Error:", err);
   }
 })();
+
+export default {teamData};
+

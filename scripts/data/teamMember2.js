@@ -2,8 +2,8 @@
 import { defineField, defineType } from "sanity";
 
 export default defineType({
-  name: "teamMember",
-  title: "Team Member",
+  name: "teamMember2",
+  title: "Team Member2",
   type: "document",
   fields: [
     defineField({
@@ -13,12 +13,12 @@ export default defineType({
     }),
     defineField({
       name: "title",
-      title: "Job Title",
+      title: "Title",
       type: "string",
     }),
     defineField({
       name: "imgSrc",
-      title: "Head Shot",
+      title: "Image Source",
       type: "image",
       options: {
         hotspot: true,
@@ -31,7 +31,7 @@ export default defineType({
     }),
     defineField({
       name: "clients",
-      title: "Client List",
+      title: "Clients",
       type: "object",
       fields: [
         defineField({
