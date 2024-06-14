@@ -5,6 +5,8 @@
 // import team from './team3'
 // import introBlock  from '../../scripts/data/approachIntroBlock'
 import teamMember from '../../scripts/data/teamMember'
-import teamMember2 from '../../scripts/data/teamMember2'
+import approachIntroBlockSchema from '../../scripts/data/approachIntroBlockSchema'
+import approachBlock from '../../scripts/data/approachBlock'
+import tagline from '../../scripts/data/tagline'
 
-export const schemaTypes = [teamMember]
+export const schemaTypes = [teamMember, approachIntroBlockSchema, approachBlock, tagline]
