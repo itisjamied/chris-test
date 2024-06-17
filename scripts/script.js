@@ -149,39 +149,30 @@ window.addEventListener("pageshow", (event) => {
   watchHeaderInView();
 });
 
-function isNotAppleProduct() {
+
+function isWindowsOS() {
   var platform = window.navigator.platform;
   var userAgent = window.navigator.userAgent;
-  return !(
-    /Mac|iPad|iPhone|iPod/.test(platform) ||
-    /Mac|iPad|iPhone|iPod/.test(userAgent)
+  return (
+    /Win/.test(platform) ||
+    /Windows/.test(userAgent)
   );
 }
 
-// function applyWhiteTextShadow() {
-//   if (isNotAppleProduct()) {
-//     var elements = document.querySelectorAll(".text-jumbo");
-//     console.log("Elements selected:", elements);
-//     elements.forEach(function (element) {
-//       element.classList.add("white-text-shadow");
-//       console.log("Added white-text-shadow to:", element);
-//     });
-//   }
-// }
-
 function applyWhiteTextShadow() {
-  if (isNotAppleProduct()) {
+  if (isWindowsOS()) {
     var elements = document.querySelectorAll(".text-jumbo");
     console.log("Elements selected:", elements);
 
     // If there are more than one elements with class "text-jumbo"
     if (elements.length > 1) {
       // Remove the top element
-      elements[0].remove();
-      console.log("Top element removed:", elements[0]);
+      var removedElement = elements[0];
+      removedElement.remove();
+      console.log("Top element removed:", removedElement);
     }
 
-    // Apply class to the remaining element
+    // Apply class to the remaining elements
     elements.forEach(function (element) {
       element.classList.add("white-text-shadow");
       console.log("Added white-text-shadow to:", element);
