@@ -1,7 +1,7 @@
 import { generalData } from "./data/data.js";
 
 // const teamData = require("./export.js");
-import { teamData } from "../src/export.js";
+import teamData from "../src/export.js";
 import { introBlock } from "./data/approachIntroBlock.js";
 import { footer as footerData } from "./data/footer.js"; // Import the footer data
 

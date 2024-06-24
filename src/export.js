@@ -1,11 +1,14 @@
 // index.js
 
 // const fetchTeamData = require("./fetchData");
-import fetchTeamData from "./fetchData.js"
+// import fetchTeamData from "./fetchData.js"
+import { fetchTeamData } from '../sanity-studio/sanity-utils.js';
+
+let teamData;
 
 (async () => {
   try {
-    const teamData = await fetchTeamData();
+    teamData = await fetchTeamData();
     console.log("teamData:", JSON.stringify(teamData, null, 2));
 
     // Export the fetched data
@@ -17,5 +20,6 @@ import fetchTeamData from "./fetchData.js"
   }
 })();
 
-export default {teamData};
+export default teamData;
+// export const getTeamData = () => teamData;
 
