@@ -2,7 +2,7 @@
 import {createClient} from 'https://esm.sh/@sanity/client'
 
 
-console.log('Sanity Client is installed');
+// console.log('Sanity Client is installed');
 
 const client = createClient({
   projectId: "wfwxz1rq", // your project ID
@@ -86,6 +86,8 @@ export async function fetchTeamData() {
         },
       };
     });
+
+    // console.log("teamData:", JSON.stringify(teamData, null, 2));
 
     return teamData;
   } catch (err) {
