@@ -5,7 +5,7 @@ import { teamData } from "./data/team.js";
 import { introBlock } from "./data/approachIntroBlock.js";
 import { footer as footerData } from "./data/footer.js"; // Import the footer data
 
-console.log(teamData);
+// console.log(teamData);
 let generalData = {
   tagline: {
     home: "Temp",
@@ -75,13 +75,13 @@ function TextElements(textData) {
 }
 
 function TeamMembers(textData) {
-  console.log(textData.team)
+  // console.log(textData.team)
   const mainContainer = document.querySelector(".main-container");
   if (!textData.team || !mainContainer) return;
 
   Object.keys(textData.team).forEach((memberKey, index) => {
     const member = memberData.team[memberKey];
-    console.log(member)
+    // console.log(member)
     const memberWrapper = document.createElement("div");
     memberWrapper.className = "container no-border fadeInUp";
     if (index > 0) {
