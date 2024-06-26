@@ -48,11 +48,14 @@ function TextElements() {
 }
 
 function TeamMembers() {
+console.log(textData.team);
+
   const mainContainer = document.querySelector(".main-container");
   if (!textData.team || !mainContainer) return;
 
   Object.keys(textData.team).forEach((memberKey, index) => {
     const member = textData.team[memberKey];
+    console.log(member);
     const memberWrapper = document.createElement("div");
     memberWrapper.className = "container no-border fadeInUp";
     if (index > 0) {
