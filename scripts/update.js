@@ -8,7 +8,7 @@ import { footer as footerData } from "./data/footer.js"; // Import the footer da
 console.log(teamData);
 let generalData = {
   tagline: {
-    home: "wekjuaebfikuefbwkejufb",
+    home: "Temp",
   },
 };
 
@@ -172,21 +172,21 @@ function handleFooter(textData) {
 function updateContent(textData) {
   TextElements(textData);
   TeamMembers(textData);
-  handleFooter(textData);
+  // handleFooter(textData);
 }
 
 window.onload = initializeData;
 
 // Ensure Lottie player is loaded before setting src
-const lottiePlayer = document.querySelector("dotlottie-player");
-if (lottiePlayer) {
-  const lottieSrc = getNestedValue(textData, "approach.lottieSrc");
-  const lottieSpeed = getNestedValue(textData, "approach.lottieSpeed");
+// const lottiePlayer = document.querySelector("dotlottie-player");
+// if (lottiePlayer) {
+//   const lottieSrc = getNestedValue(textData, "approach.lottieSrc");
+//   const lottieSpeed = getNestedValue(textData, "approach.lottieSpeed");
 
-  if (lottieSrc) {
-    lottiePlayer.setAttribute("src", lottieSrc);
-  }
-  if (lottieSpeed) {
-    lottiePlayer.setAttribute("speed", lottieSpeed);
-  }
-}
+//   if (lottieSrc) {
+//     lottiePlayer.setAttribute("src", lottieSrc);
+//   }
+//   if (lottieSpeed) {
+//     lottiePlayer.setAttribute("speed", lottieSpeed);
+//   }
+// }
