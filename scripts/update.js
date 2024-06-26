@@ -104,6 +104,8 @@ console.log(textData.team);
     memberWrapper.appendChild(memberContainer);
     memberWrapper.appendChild(contactContainer);
     mainContainer.appendChild(memberWrapper);
+    console.log(memberWrapper);
+
   });
 }
 

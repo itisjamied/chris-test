@@ -60,6 +60,7 @@ function animateOnLoad() {
       if (isInViewport(element)) {
         element.style.animationDelay = `${viewportIndex * 600}ms`;
         element.classList.add("animated");
+        console.log("reachMe00");
         viewportIndex++;  
       } else {
         element.style.visibility = "visible";
