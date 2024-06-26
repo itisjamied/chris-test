@@ -154,7 +154,7 @@ function isMacOS() {
 function applyWhiteTextShadow() {
   if (isMacOS()) {
       var elements = document.querySelectorAll('.text-jumbo');
-      console.log("Elements selected:", elements); 
+      // console.log("Elements selected:", elements); 
       elements.forEach(function(element) {
           element.classList.add('white-text-shadow');
           console.log("Added white-text-shadow to:", element); 

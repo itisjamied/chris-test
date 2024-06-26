@@ -2,6 +2,7 @@ import { generalData } from "./data/data.js";
 import { teamData } from "./data/team.js";
 import { introBlock } from "./data/approachIntroBlock.js";
 import { footer as footerData } from "./data/footer.js"; // Import the footer data
+console.log(teamData)
 
 const textData = {
   ...generalData,
@@ -149,7 +150,7 @@ function handleFooter() {
 function updateContent() {
   TextElements();
   TeamMembers();
-  handleFooter();
+  // handleFooter();
 }
 
 window.onload = updateContent;
