@@ -81,6 +81,7 @@ function TeamMembers(textData) {
 
   Object.keys(textData.team).forEach((memberKey, index) => {
     const member = memberData.team[memberKey];
+    console.log(member)
     const memberWrapper = document.createElement("div");
     memberWrapper.className = "container no-border fadeInUp";
     if (index > 0) {
@@ -89,6 +90,7 @@ function TeamMembers(textData) {
 
     const memberContainer = document.createElement("div");
     memberContainer.className = "desktop-col-7-left tablet-col-4";
+    console.log(memberContainer);
 
     memberContainer.innerHTML = `
       <h2 class="text-l">${member.name}</h2>
@@ -129,6 +131,8 @@ function TeamMembers(textData) {
     memberWrapper.appendChild(memberContainer);
     memberWrapper.appendChild(contactContainer);
     mainContainer.appendChild(memberWrapper);
+    console.log(memberWrapper);
+
   });
 }
 
