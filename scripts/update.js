@@ -16,11 +16,6 @@ const memberData = {
   team: teamData,
 };
 
-console.log(memberData);
-
-
-
-
 // Function to initialize the data
 async function initializeData() {
   try {
@@ -37,10 +32,7 @@ async function initializeData() {
 
     // Update content only after data initialization is complete
     updateContent(textData);
-    console.log(textData);
-    console.log(textData.team);
-    TeamMembers();
-
+  
   } catch (err) {
     console.error("Error fetching tagline:", err);
   }
@@ -82,12 +74,12 @@ function TextElements(textData) {
   });
 }
 
-function TeamMembers() {
-  console.log(memberData)
+function TeamMembers(textData) {
+  console.log(textData.team)
   const mainContainer = document.querySelector(".main-container");
-  if (!memberData.team || !mainContainer) return;
+  if (!textData.team || !mainContainer) return;
 
-  Object.keys(memberData.team).forEach((memberKey, index) => {
+  Object.keys(textData.team).forEach((memberKey, index) => {
     const member = memberData.team[memberKey];
     const memberWrapper = document.createElement("div");
     memberWrapper.className = "container no-border fadeInUp";
@@ -185,7 +177,7 @@ function handleFooter(textData) {
 
 function updateContent(textData) {
   TextElements(textData);
-  // TeamMembers();
+  TeamMembers(textData);
   // handleFooter(textData);
 }
 
