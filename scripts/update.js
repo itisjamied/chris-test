@@ -2,7 +2,7 @@ import { generalData } from "./data/data.js";
 import { teamData } from "./data/team.js";
 import { introBlock } from "./data/approachIntroBlock.js";
 import { footer as footerData } from "./data/footer.js"; // Import the footer data
-console.log(teamData)
+// console.log(teamData)
 
 const textData = {
   ...generalData,
@@ -48,14 +48,14 @@ function TextElements() {
 }
 
 function TeamMembers() {
-console.log(textData.team);
+// console.log(textData.team);
 
   const mainContainer = document.querySelector(".main-container");
   if (!textData.team || !mainContainer) return;
 
   Object.keys(textData.team).forEach((memberKey, index) => {
     const member = textData.team[memberKey];
-    console.log(member);
+    // console.log(member);
     const memberWrapper = document.createElement("div");
     memberWrapper.className = "container no-border fadeInUp";
     if (index > 0) {
