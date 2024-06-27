@@ -11,14 +11,14 @@ let generalData = {
 };
 
 
-const memberData = {
-  team: teamData,
-};
+
+console.log(teamData);
 
 // Function to initialize the data
  async function initializeData() {
   try {
     const tagline = await fetchTagline();
+    // console.log(tagline);
     generalData.tagline.home = tagline;
 
     // Create the textData object after the tagline has been fetched
@@ -26,8 +26,10 @@ const memberData = {
       ...generalData,
       // team: teamData,
       // ...introBlock,
-      // footer: footerData,
+      footer: footerData,
     };
+
+  
 
     // Update content only after data initialization is complete
     updateContent(textData);
@@ -38,13 +40,23 @@ const memberData = {
   }
 }
 
-// async function initializeTeamData() {
-//   try {
-//     const 
-//   }
-// }
+async function initializeTeamData() {
+  try {
+    // const teamMember = await fetchTeamData();
+    // console.log(teamMember)
 
-TeamMembers(memberData);
+    const memberData = {
+      team: teamData,
+    };
+
+  TeamMembers(memberData);
+
+  }
+  catch (err) {
+    console.error("Error fetching teamMember:", err);
+  }
+}
+
 
 
 function getNestedValue(obj, key) {
@@ -83,7 +95,7 @@ function TextElements(textData) {
   });
 }
 
-function TeamMembers() {
+function TeamMembers(memberData) {
   const mainContainer = document.querySelector(".main-container");
   if (!memberData.team || !mainContainer) return;
 
@@ -137,7 +149,6 @@ function TeamMembers() {
     memberWrapper.appendChild(memberContainer);
     memberWrapper.appendChild(contactContainer);
     mainContainer.appendChild(memberWrapper);
-    console.log(memberWrapper);
 
   });
 }
@@ -187,21 +198,26 @@ function handleFooter(textData) {
 function updateContent(textData) {
   TextElements(textData);
   // TeamMembers(textData);
-  // handleFooter(textData);
+  handleFooter(textData);
 }
 
-window.onload = initializeData;
 
-// Ensure Lottie player is loaded before setting src
-// const lottiePlayer = document.querySelector("dotlottie-player");
-// if (lottiePlayer) {
-//   const lottieSrc = getNestedValue(textData, "approach.lottieSrc");
-//   const lottieSpeed = getNestedValue(textData, "approach.lottieSpeed");
+window.addEventListener('load', initializeData);
+window.addEventListener('load', initializeTeamData);
 
-//   if (lottieSrc) {
-//     lottiePlayer.setAttribute("src", lottieSrc);
-//   }
-//   if (lottieSpeed) {
-//     lottiePlayer.setAttribute("speed", lottieSpeed);
-//   }
-// }
+// window.onload = initializeData;
+// window.onload = initializeTeamData;
+
+  // Ensure Lottie player is loaded before setting src
+  // const lottiePlayer = document.querySelector("dotlottie-player");
+  // if (lottiePlayer) {
+  //   const lottieSrc = getNestedValue(textData, "approach.lottieSrc");
+  //   const lottieSpeed = getNestedValue(textData, "approach.lottieSpeed");
+  
+  //   if (lottieSrc) {
+  //     lottiePlayer.setAttribute("src", lottieSrc);
+  //   }
+  //   if (lottieSpeed) {
+  //     lottiePlayer.setAttribute("speed", lottieSpeed);
+  //   }
+  // }

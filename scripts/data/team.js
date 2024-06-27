@@ -33,10 +33,10 @@ export const teamData = {
     },
   },
   member02: {
-    name: "John Doe",
-    title: "Managing Partner",
-    imgSrc: "../images/lipp-pross-photo.png",
-    bio: `Christopher is an accomplished product and design leader, recognized for his track record guiding teams at both agencies and large incumbents. His expertise has been pivotal in tackling complex business challenges, collaborating with the likes of algorithmic trading firms, governments, healthcare advocacy groups, and CPG brands. His broad experience fuels his ability to draw unique parallels across industries, consistently generating outsized outcomes. His contributions have resulted in innovative digital products, new business models, and the strategic redesign of organizations. <a href="../images/launch-letter.pdf" target="_blank">Read why Chris founded ValueForm.</a>`,
+    name: "Jamie",
+    title: "Is Sawesome",
+    imgSrc: "../images/headshot.png",
+    bio: `Wooooooo! Lorem ipsum!!! Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</a>`,
     clients: {
       title: "Select Clients:",
       category01: {
