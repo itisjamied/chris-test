@@ -1,4 +1,4 @@
-import { fetchTagline } from "../../sanity-studio/fetchTagline.js";
+import { fetchTagline } from "../sanity-studio/fetchTagline.js";
 import { fetchTeamData } from "../sanity-studio/sanity-utils.js";
 import { teamData } from "./data/team.js";
 import { introBlock } from "./data/approachIntroBlock.js";
@@ -26,7 +26,7 @@ console.log(teamData);
       ...generalData,
       // team: teamData,
       // ...introBlock,
-      footer: footerData,
+      // footer: footerData,
     };
 
   
@@ -198,7 +198,7 @@ function handleFooter(textData) {
 function updateContent(textData) {
   TextElements(textData);
   // TeamMembers(textData);
-  handleFooter(textData);
+  // handleFooter(textData);
 }
 
 

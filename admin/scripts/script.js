@@ -62,14 +62,9 @@ function animateOnLoad() {
 
         element.style.animationDelay = `${viewportIndex * 600}ms`;
         element.classList.add("animated");
-        // console.log("reachMe00");
-        // console.log("###################################");
-        // console.log(element);
-        // console.log(element.classList);
-        // console.log("###################################");
+
 
         viewportIndex++;  
-    // console.log(viewportIndex);
 
       } else {
         element.style.visibility = "visible";

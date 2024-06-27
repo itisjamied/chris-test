@@ -1,5 +1,4 @@
 import {createClient} from 'https://esm.sh/@sanity/client'
-// import {tagline} from './schemaTypes/tagline'
  
 const client = createClient({
     projectId: "wfwxz1rq", // your project ID
