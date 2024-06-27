@@ -55,9 +55,11 @@ function animateOnLoad() {
   );
 
   setTimeout(() => {
-    let viewportIndex = 0;  
+    let viewportIndex = 0; 
+
     fadeInUpElements.forEach((element) => {
       if (isInViewport(element)) {
+
         element.style.animationDelay = `${viewportIndex * 600}ms`;
         element.classList.add("animated");
         // console.log("reachMe00");
@@ -67,6 +69,8 @@ function animateOnLoad() {
         console.log("###################################");
 
         viewportIndex++;  
+    console.log(viewportIndex);
+
       } else {
         element.style.visibility = "visible";
       }

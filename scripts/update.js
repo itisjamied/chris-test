@@ -1,23 +1,22 @@
 import { fetchTagline } from "../../sanity-studio/fetchTagline.js";
 import { fetchTeamData } from "../sanity-studio/sanity-utils.js";
-// import teamData from "../src/export.js";
 import { teamData } from "./data/team.js";
 import { introBlock } from "./data/approachIntroBlock.js";
 import { footer as footerData } from "./data/footer.js"; // Import the footer data
 
-// console.log(teamData);
 let generalData = {
   tagline: {
     home: "Temp",
   },
 };
 
+
 const memberData = {
   team: teamData,
 };
 
 // Function to initialize the data
-async function initializeData() {
+ async function initializeData() {
   try {
     const tagline = await fetchTagline();
     generalData.tagline.home = tagline;
@@ -25,18 +24,28 @@ async function initializeData() {
     // Create the textData object after the tagline has been fetched
     const textData = {
       ...generalData,
-      team: teamData,
+      // team: teamData,
       // ...introBlock,
       // footer: footerData,
     };
 
     // Update content only after data initialization is complete
     updateContent(textData);
+
   
   } catch (err) {
     console.error("Error fetching tagline:", err);
   }
 }
+
+// async function initializeTeamData() {
+//   try {
+//     const 
+//   }
+// }
+
+TeamMembers(memberData);
+
 
 function getNestedValue(obj, key) {
   return key.split(".").reduce((o, i) => (o ? o[i] : null), obj);
@@ -74,14 +83,12 @@ function TextElements(textData) {
   });
 }
 
-function TeamMembers(textData) {
-  // console.log(textData.team)
+function TeamMembers() {
   const mainContainer = document.querySelector(".main-container");
-  if (!textData.team || !mainContainer) return;
+  if (!memberData.team || !mainContainer) return;
 
-  Object.keys(textData.team).forEach((memberKey, index) => {
+  Object.keys(memberData.team).forEach((memberKey, index) => {
     const member = memberData.team[memberKey];
-    // console.log(member)
     const memberWrapper = document.createElement("div");
     memberWrapper.className = "container no-border fadeInUp";
     if (index > 0) {
@@ -90,7 +97,6 @@ function TeamMembers(textData) {
 
     const memberContainer = document.createElement("div");
     memberContainer.className = "desktop-col-7-left tablet-col-4";
-    console.log(memberContainer);
 
     memberContainer.innerHTML = `
       <h2 class="text-l">${member.name}</h2>
@@ -137,7 +143,6 @@ function TeamMembers(textData) {
 }
 
 function handleFooter(textData) {
-  // console.log("I got in here");
   const footerContainer = document.querySelector("footer");
   if (footerContainer) {
     const footerData = textData.footer;
@@ -181,7 +186,7 @@ function handleFooter(textData) {
 
 function updateContent(textData) {
   TextElements(textData);
-  TeamMembers(textData);
+  // TeamMembers(textData);
   // handleFooter(textData);
 }
 
