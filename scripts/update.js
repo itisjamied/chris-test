@@ -29,11 +29,13 @@ console.log(teamData);
       footer: footerData,
     };
 
-  
 
     // Update content only after data initialization is complete
     updateContent(textData);
 
+    animateOnLoad();
+
+  
   
   } catch (err) {
     console.error("Error fetching tagline:", err);
@@ -42,15 +44,16 @@ console.log(teamData);
 
 async function initializeTeamData() {
   try {
-    // const teamMember = await fetchTeamData();
-    // console.log(teamMember)
+    const teamMember = await fetchTeamData();
+    console.log(teamMember)
 
     const memberData = {
-      team: teamData,
+      team: teamMember,
     };
 
   TeamMembers(memberData);
 
+  animateOnLoad();
   }
   catch (err) {
     console.error("Error fetching teamMember:", err);
@@ -199,6 +202,7 @@ function updateContent(textData) {
   TextElements(textData);
   // TeamMembers(textData);
   handleFooter(textData);
+
 }
 
 

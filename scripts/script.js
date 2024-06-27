@@ -67,9 +67,11 @@ function animateOnLoad() {
         // console.log(element);
         // console.log(element.classList);
         // console.log("###################################");
+        console.log(`Element ${viewportIndex + 1} is in the viewport:`);
+        console.log(element); 
 
         viewportIndex++;  
-    // console.log(viewportIndex);
+    console.log(viewportIndex);
 
       } else {
         element.style.visibility = "visible";
@@ -82,7 +84,7 @@ function animateOnLoad() {
   setTimeout(() => {
     const player = document.getElementById("lottieAnimation");
     if (player) player.play();
-  }, 1000);
+  }, 2000);
 }
 
 function animateOncePerSession(elementId, animationClass) {
