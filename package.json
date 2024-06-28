@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "sanity build --project sanity-studio && mkdir -p dist && cp -r index.html dist && cp -r pages dist/pages && cp -r css dist/css && cp -r images dist/images && cp -r scripts dist/scripts && cp sanity-studio/dist/sanity-utils.js dist/sanity-utils.js",
+    "build": "cd sanity-studio && sanity build && cd .. && mkdir -p dist && cp -r index.html dist && cp -r pages dist/pages && cp -r css dist/css && cp -r images dist/images && cp -r scripts dist/scripts && cp -r sanity-studio/dist/* dist/",
     "vercel-build": "npm run build"
   },
   "keywords": [],
