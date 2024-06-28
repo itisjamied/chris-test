@@ -2,6 +2,7 @@ import { fetchTagline } from "../../sanity-studio/fetchTagline.js";
 import { fetchTeamData } from "../sanity-studio/sanity-utils.js";
 import { teamData } from "./data/team.js";
 import { introBlock } from "./data/approachIntroBlock.js";
+import { approachBlock } from "./data/approachBlock.js";
 import { footer as footerData } from "./data/footer.js"; // Import the footer data
 
 let generalData = {
@@ -10,9 +11,8 @@ let generalData = {
   },
 };
 
-
-
 console.log(teamData);
+console.log(approachBlock);
 
 // Function to initialize the data
  async function initializeData() {
@@ -24,17 +24,14 @@ console.log(teamData);
     const textData = {
       ...generalData,
       // team: teamData,
+      ...approachBlock,
       ...introBlock,
       footer: footerData,
     };
 
     // Update content only after data initialization is complete
     updateContent(textData);
-
     animateOnLoad();
-
-  
-  
   } catch (err) {
     console.error("Error fetching tagline:", err);
   }
@@ -43,7 +40,7 @@ console.log(teamData);
 async function initializeTeamData() {
   try {
     const teamMember = await fetchTeamData();
-    console.log(teamMember)
+    // console.log(teamMember)
 
     const memberData = {
       team: teamMember,
@@ -57,8 +54,6 @@ async function initializeTeamData() {
     console.error("Error fetching teamMember:", err);
   }
 }
-
-
 
 function getNestedValue(obj, key) {
   return key.split(".").reduce((o, i) => (o ? o[i] : null), obj);
@@ -95,6 +90,16 @@ function TextElements(textData) {
     }
   });
 }
+
+function handleApproach(approachData) {
+  const mainContainer = document.querySelector(".main-container");
+  console.log("Here")
+
+  if (!approachBlock || !mainContainer) return;
+  console.log("Here")
+
+}
+
 
 function TeamMembers(memberData) {
   const mainContainer = document.querySelector(".main-container");
@@ -196,11 +201,12 @@ function handleFooter(textData) {
   }
 }
 
+
 function updateContent(textData) {
   TextElements(textData);
   // TeamMembers(textData);
+  handleApproach(textData)
   handleFooter(textData);
-
 }
 
 
