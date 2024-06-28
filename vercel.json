@@ -3,7 +3,7 @@
       {
         "src": "sanity-studio/package.json",
         "use": "@vercel/static-build",
-        "config": { "distDir": "dist" }
+        "config": { "distDir": "sanity-studio/dist" }
       },
       {
         "src": "package.json",
