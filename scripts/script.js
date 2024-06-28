@@ -67,11 +67,11 @@ function animateOnLoad() {
         // console.log(element);
         // console.log(element.classList);
         // console.log("###################################");
-        console.log(`Element ${viewportIndex + 1} is in the viewport:`);
-        console.log(element); 
+        // console.log(`Element ${viewportIndex + 1} is in the viewport:`);
+        // console.log(element); 
 
         viewportIndex++;  
-    console.log(viewportIndex);
+    // console.log(viewportIndex);
 
       } else {
         element.style.visibility = "visible";

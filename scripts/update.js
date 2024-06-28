@@ -12,7 +12,7 @@ let generalData = {
 
 
 
-console.log(teamData);
+// console.log(teamData);
 
 // Function to initialize the data
  async function initializeData() {
@@ -45,7 +45,7 @@ console.log(teamData);
 async function initializeTeamData() {
   try {
     const teamMember = await fetchTeamData();
-    console.log(teamMember)
+    // console.log(teamMember)
 
     const memberData = {
       team: teamMember,
