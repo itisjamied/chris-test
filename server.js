@@ -2,7 +2,9 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const port = 3000; // You can change this to any port you prefer
+// const port = 3000; // You can change this to any port you prefer
+const port = process.env.PORT || 3000;
+
 
 // Serve static files from the /sanity-studio/dist/static directory with the /static prefix
 app.use('/static', express.static(path.join(__dirname, 'sanity-studio', 'dist', 'static')));
