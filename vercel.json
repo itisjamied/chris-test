@@ -8,7 +8,7 @@
       {
         "src": "package.json",
         "use": "@vercel/static-build",
-        "config": { "distDir": "." }
+        "config": { "distDir": "dist" }
       }
     ],
     "rewrites": [
@@ -18,7 +18,7 @@
       },
       {
         "source": "/(.*)",
-        "destination": "/index.html"
+        "destination": "/dist/$1"
       }
     ]
   }
