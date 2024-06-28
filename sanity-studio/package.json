@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "sanity dev",
     "start": "sanity start",
-    "build": "sanity build && other-build-commands",
+    "build": "sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy"
   },
@@ -17,7 +17,6 @@
   "dependencies": {
     "@sanity/client": "^6.20.1",
     "@sanity/vision": "^3.45.0",
-    "concurrently": "^8.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^4.18.0",
