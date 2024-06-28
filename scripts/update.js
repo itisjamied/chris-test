@@ -18,17 +18,15 @@ console.log(teamData);
  async function initializeData() {
   try {
     const tagline = await fetchTagline();
-    // console.log(tagline);
     generalData.tagline.home = tagline;
 
     // Create the textData object after the tagline has been fetched
     const textData = {
       ...generalData,
       // team: teamData,
-      // ...introBlock,
+      ...introBlock,
       footer: footerData,
     };
-
 
     // Update content only after data initialization is complete
     updateContent(textData);
@@ -209,19 +207,19 @@ function updateContent(textData) {
 window.addEventListener('load', initializeData);
 window.addEventListener('load', initializeTeamData);
 
-// window.onload = initializeData;
-// window.onload = initializeTeamData;
+window.onload = initializeData;
+window.onload = initializeTeamData;
 
   // Ensure Lottie player is loaded before setting src
-  // const lottiePlayer = document.querySelector("dotlottie-player");
-  // if (lottiePlayer) {
-  //   const lottieSrc = getNestedValue(textData, "approach.lottieSrc");
-  //   const lottieSpeed = getNestedValue(textData, "approach.lottieSpeed");
+  const lottiePlayer = document.querySelector("dotlottie-player");
+  if (lottiePlayer) {
+    const lottieSrc = getNestedValue(textData, "approach.lottieSrc");
+    const lottieSpeed = getNestedValue(textData, "approach.lottieSpeed");
   
-  //   if (lottieSrc) {
-  //     lottiePlayer.setAttribute("src", lottieSrc);
-  //   }
-  //   if (lottieSpeed) {
-  //     lottiePlayer.setAttribute("speed", lottieSpeed);
-  //   }
-  // }
+    if (lottieSrc) {
+      lottiePlayer.setAttribute("src", lottieSrc);
+    }
+    if (lottieSpeed) {
+      lottiePlayer.setAttribute("speed", lottieSpeed);
+    }
+  }
