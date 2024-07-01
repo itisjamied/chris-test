@@ -89,45 +89,82 @@ function TextElements(textData) {
   });
 }
 
+// function handleApproach(approachData) {
+//   const mainContainer = document.querySelector(".approach-container");
+//   if (!approachData || !mainContainer) return;
+
+//   Object.keys(approachData).forEach((approachKey, index) => {
+//     //create individual wrapper
+ 
+//     // if (index > 0) {
+//     //   approachWrapper.classList.add("no-before-after", "member-top");
+//     // }
+
+//     const approachBlock = approachData[approachKey];
+
+//     const approachWrapper = document.createElement("div");
+//     approachWrapper.className = "container fadeInUp";
+
+//     approachWrapper.innerHTML = `
+//     <h2 class="desktop-col-10 tablet-col-6 text-l">${approachBlock.title}</h2>
+//     <p class="text-m desktop-col-7 tablet-col-6">
+//      ${approachBlock.body}
+//     </p>
+//     <h4 class="desktop-col-7 tablet-col-6">Capabilities:</h4>
+//     <ul class="desktop-col-10 tablet-col-6 text-m">
+//       <li>Concept Testing</li>
+//       <li>Usability Testing</li>
+//       <li class="no-border">Evaluative Research</li>
+//       <li>Analytics &amp; Telemetry</li>
+//     </ul>
+//   `;
+
+//   mainContainer.appendChild(approachWrapper);
+
+//   });
+
+// }
+
 function handleApproach(approachData) {
   const mainContainer = document.querySelector(".approach-container");
-
   if (!approachData || !mainContainer) return;
-  console.log("In Here")
 
   Object.keys(approachData).forEach((approachKey, index) => {
-    // console.log(approachKey);
-    // console.log(approachData[approachKey])
     const approachBlock = approachData[approachKey];
+
     const approachWrapper = document.createElement("div");
     approachWrapper.className = "container fadeInUp";
-    if (index > 0) {
-      approachWrapper.classList.add("no-before-after", "member-top");
-    }
 
-    const approachContainer = document.createElement("div");
-    approachContainer.className = "desktop-col-7-left tablet-col-4";
+    // Create the HTML structure without the <li> elements
+    approachWrapper.innerHTML = `
+      <h2 class="desktop-col-10 tablet-col-6 text-l">${approachBlock.title}</h2>
+      <p class="text-m desktop-col-7 tablet-col-6">
+       ${approachBlock.body}
+      </p>
+      <h4 class="desktop-col-7 tablet-col-6">Capabilities:</h4>
+      <ul class="desktop-col-10 tablet-col-6 text-m"></ul>
+    `;
 
-    approachContainer.innerHTML = `
-    <h2 class="desktop-col-10 tablet-col-6 text-l">${approachBlock.title}</h2>
-    <p class="text-m desktop-col-7 tablet-col-6">
-     ${approachBlock.body}
-    </p>
-    <h4 class="desktop-col-7 tablet-col-6">Capabilities:</h4>
-    <ul class="desktop-col-10 tablet-col-6 text-m">
-      <li>Concept Testing</li>
-      <li>Usability Testing</li>
-      <li class="no-border">Evaluative Research</li>
-      <li>Analytics &amp; Telemetry</li>
-    </ul>
-  `;
+    // Get the <ul> element to append <li> elements to it
+    const capabilitiesList = approachWrapper.querySelector("ul");
 
-  approachWrapper.appendChild(approachContainer);
-  mainContainer.appendChild(approachWrapper);
+    // Dynamically create <li> elements based on the capabilities array
+    approachBlock.capabilities.forEach((capability, capIndex) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = capability;
 
+      // Add class no-border to the last item
+      if (capIndex === approachBlock.capabilities.length - 1) {
+        listItem.classList.add("no-border");
+      }
+
+      capabilitiesList.appendChild(listItem);
+    });
+
+    mainContainer.appendChild(approachWrapper);
   });
-
 }
+
 
 
 function TeamMembers(memberData) {
@@ -234,7 +271,7 @@ function handleFooter(textData) {
 function updateContent(textData) {
   TextElements(textData);
   // TeamMembers(textData);
-  handleApproach(textData)
+  handleApproach(approachBlock)
   handleFooter(textData);
 }
 
