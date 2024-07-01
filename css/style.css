@@ -809,6 +809,31 @@ main.internal .container:first-of-type + .container + .container + .container + 
   content: "05.";
 }
 
+main.internal .container:first-of-type + .container + .container + .container + .container + .container::before,
+main.internal .container:first-of-type + .container + .container + .container + .container + .container::after {
+  content: "06.";
+}
+
+main.internal .container:first-of-type + .container + .container + .container + .container + .container + .container::before,
+main.internal .container:first-of-type + .container + .container + .container + .container + .container + .container::after {
+  content: "07.";
+}
+
+main.internal .container:first-of-type + .container + .container + .container + .container + .container + .container + .container::before,
+main.internal .container:first-of-type + .container + .container + .container + .container + .container + .container + .container::after {
+  content: "08.";
+}
+
+main.internal .container:first-of-type + .container + .container + .container + .container + .container + .container + .container + .container::before,
+main.internal .container:first-of-type + .container + .container + .container + .container + .container + .container + .container + .container::after {
+  content: "09.";
+}
+
+main.internal .container:first-of-type + .container + .container + .container + .container + .container + .container + .container + .container + .container::before,
+main.internal .container:first-of-type + .container + .container + .container + .container + .container + .container + .container + .container + .container::after {
+  content: "10.";
+}
+
 .no-before-after::before,
 .no-before-after::after {
   content: none !important;
