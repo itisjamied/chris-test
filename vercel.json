@@ -18,15 +18,15 @@
   "rewrites": [
     {
       "source": "/admin/(.*)",
-      "destination": "/dist/admin/index.html"
+      "destination": "/admin/index.html"
     },
     {
       "source": "/static/(.*)",
-      "destination": "/dist/static/$1"
+      "destination": "/static/$1"
     },
     {
       "source": "/(.*)",
-      "destination": "/dist/$1"
+      "destination": "/$1"
     }
   ]
 }
