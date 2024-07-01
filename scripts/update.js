@@ -135,7 +135,6 @@ function handleApproach(approachData) {
     const approachWrapper = document.createElement("div");
     approachWrapper.className = "container fadeInUp";
 
-    // Create the HTML structure without the <li> elements
     approachWrapper.innerHTML = `
       <h2 class="desktop-col-10 tablet-col-6 text-l">${approachBlock.title}</h2>
       <p class="text-m desktop-col-7 tablet-col-6">
@@ -145,22 +144,30 @@ function handleApproach(approachData) {
       <ul class="desktop-col-10 tablet-col-6 text-m"></ul>
     `;
 
-    // Get the <ul> element to append <li> elements to it
+    // get the <ul> element to append <li> elements to it
     const capabilitiesList = approachWrapper.querySelector("ul");
+    const capabilitiesLength = approachBlock.capabilities.length;
 
-    // Dynamically create <li> elements based on the capabilities array
+    // dynamically create <li> elements based on the capabilities array
     approachBlock.capabilities.forEach((capability, capIndex) => {
       const listItem = document.createElement("li");
       listItem.textContent = capability;
 
-      // Add class no-border to the last item
-      if (capIndex === approachBlock.capabilities.length - 1) {
-        listItem.classList.add("no-border");
-      }
 
+      // Add class no-border based on the length of the capabilities array
+      if (capabilitiesLength % 2 === 0) {
+        // even: add no-border to the last two items
+        if (capIndex >= capabilitiesLength - 2) {
+          listItem.classList.add("no-border");
+        }
+      } else {
+        // odd: add no-border to the last item
+        if (capIndex === capabilitiesLength - 1) {
+          listItem.classList.add("no-border");
+        }
+      }
       capabilitiesList.appendChild(listItem);
     });
-
     mainContainer.appendChild(approachWrapper);
   });
 }
