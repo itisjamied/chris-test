@@ -14,7 +14,7 @@ app.use('/admin', express.static(path.join(__dirname, 'sanity-studio', 'dist')))
 
 // Serve other static files from the root directory
 // app.use(express.static(path.join(__dirname, 'public'))); // Update 'public' to your main site directory if different
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Serve the main index.html for the root path
 app.get('/', (req, res) => {
