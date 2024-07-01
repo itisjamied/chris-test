@@ -89,48 +89,30 @@ function TextElements(textData) {
   });
 }
 
-// function handleApproach(approachData) {
-//   const mainContainer = document.querySelector(".approach-container");
-//   if (!approachData || !mainContainer) return;
 
-//   Object.keys(approachData).forEach((approachKey, index) => {
-//     //create individual wrapper
- 
-//     // if (index > 0) {
-//     //   approachWrapper.classList.add("no-before-after", "member-top");
-//     // }
-
-//     const approachBlock = approachData[approachKey];
-
-//     const approachWrapper = document.createElement("div");
-//     approachWrapper.className = "container fadeInUp";
-
-//     approachWrapper.innerHTML = `
-//     <h2 class="desktop-col-10 tablet-col-6 text-l">${approachBlock.title}</h2>
-//     <p class="text-m desktop-col-7 tablet-col-6">
-//      ${approachBlock.body}
-//     </p>
-//     <h4 class="desktop-col-7 tablet-col-6">Capabilities:</h4>
-//     <ul class="desktop-col-10 tablet-col-6 text-m">
-//       <li>Concept Testing</li>
-//       <li>Usability Testing</li>
-//       <li class="no-border">Evaluative Research</li>
-//       <li>Analytics &amp; Telemetry</li>
-//     </ul>
-//   `;
-
-//   mainContainer.appendChild(approachWrapper);
-
-//   });
-
-// }
 
 function handleApproach(approachData) {
   const mainContainer = document.querySelector(".approach-container");
   if (!approachData || !mainContainer) return;
 
+  // Helper function to wrap specified strings with a span having a class name
+  function wrapStringWithClass(str, substr, className, additionalClass = "") {
+    const regex = new RegExp(`(${substr})`, 'g');
+    const combinedClass = `${className} ${additionalClass}`.trim();
+    return str.replace(regex, `<span class="${combinedClass}">$1</span>`);
+  }
+
   Object.keys(approachData).forEach((approachKey, index) => {
     const approachBlock = approachData[approachKey];
+
+    // Modify body content to include styling for underline and bold
+    let modifiedBody = approachBlock.body;
+    if (approachBlock.underline) {
+      modifiedBody = wrapStringWithClass(modifiedBody, approachBlock.underline, 'underline', approachBlock.class);
+    }
+    if (approachBlock.bold) {
+      modifiedBody = wrapStringWithClass(modifiedBody, approachBlock.bold, 'bold');
+    }
 
     const approachWrapper = document.createElement("div");
     approachWrapper.className = "container fadeInUp";
@@ -138,7 +120,7 @@ function handleApproach(approachData) {
     approachWrapper.innerHTML = `
       <h2 class="desktop-col-10 tablet-col-6 text-l">${approachBlock.title}</h2>
       <p class="text-m desktop-col-7 tablet-col-6">
-       ${approachBlock.body}
+       ${modifiedBody}
       </p>
       <h4 class="desktop-col-7 tablet-col-6">Capabilities:</h4>
       <ul class="desktop-col-10 tablet-col-6 text-m"></ul>
@@ -152,7 +134,6 @@ function handleApproach(approachData) {
     approachBlock.capabilities.forEach((capability, capIndex) => {
       const listItem = document.createElement("li");
       listItem.textContent = capability;
-
 
       // Add class no-border based on the length of the capabilities array
       if (capabilitiesLength % 2 === 0) {
@@ -171,6 +152,7 @@ function handleApproach(approachData) {
     mainContainer.appendChild(approachWrapper);
   });
 }
+
 
 
 

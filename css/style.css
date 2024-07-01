@@ -1246,3 +1246,12 @@ nav.fadeInUp {
       var(--darkgrey);
   -webkit-text-stroke: 0;
 }
+
+.bold {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.underline {
+  text-decoration: underline;
+}
