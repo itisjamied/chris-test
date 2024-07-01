@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Serve the main index.html for the root path
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // Redirect any unknown paths to the index.html of the admin (SPA support)
