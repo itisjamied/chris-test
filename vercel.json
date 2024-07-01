@@ -4,7 +4,7 @@
       "src": "sanity-studio/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist/admin"
       }
     },
     {
@@ -18,7 +18,7 @@
   "rewrites": [
     {
       "source": "/admin/(.*)",
-      "destination": "/admin/index.html"
+      "destination": "/admin/$1"
     },
     {
       "source": "/static/(.*)",
