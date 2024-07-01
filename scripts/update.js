@@ -23,11 +23,12 @@ console.log(approachBlock);
     // Create the textData object after the tagline has been fetched
     const textData = {
       ...generalData,
-      // team: teamData,
+      team: teamData,
       ...approachBlock,
       ...introBlock,
       footer: footerData,
     };
+    console.log(textData);
 
     // Update content only after data initialization is complete
     updateContent(textData);
@@ -41,13 +42,10 @@ async function initializeTeamData() {
   try {
     const teamMember = await fetchTeamData();
     // console.log(teamMember)
-
     const memberData = {
       team: teamMember,
     };
-
   TeamMembers(memberData);
-
   animateOnLoad();
   }
   catch (err) {
@@ -92,11 +90,42 @@ function TextElements(textData) {
 }
 
 function handleApproach(approachData) {
-  const mainContainer = document.querySelector(".main-container");
-  console.log("Here")
+  const mainContainer = document.querySelector(".approach-container");
 
-  if (!approachBlock || !mainContainer) return;
-  console.log("Here")
+  if (!approachData || !mainContainer) return;
+  console.log("In Here")
+
+  Object.keys(approachData).forEach((approachKey, index) => {
+    // console.log(approachKey);
+    // console.log(approachData[approachKey])
+    const approachBlock = approachData[approachKey];
+    const approachWrapper = document.createElement("div");
+    approachWrapper.className = "container fadeInUp";
+    if (index > 0) {
+      approachWrapper.classList.add("no-before-after", "member-top");
+    }
+
+    const approachContainer = document.createElement("div");
+    approachContainer.className = "desktop-col-7-left tablet-col-4";
+
+    approachContainer.innerHTML = `
+    <h2 class="desktop-col-10 tablet-col-6 text-l">${approachBlock.title}</h2>
+    <p class="text-m desktop-col-7 tablet-col-6">
+     ${approachBlock.body}
+    </p>
+    <h4 class="desktop-col-7 tablet-col-6">Capabilities:</h4>
+    <ul class="desktop-col-10 tablet-col-6 text-m">
+      <li>Concept Testing</li>
+      <li>Usability Testing</li>
+      <li class="no-border">Evaluative Research</li>
+      <li>Analytics &amp; Telemetry</li>
+    </ul>
+  `;
+
+  approachWrapper.appendChild(approachContainer);
+  mainContainer.appendChild(approachWrapper);
+
+  });
 
 }
 
