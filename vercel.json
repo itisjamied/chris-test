@@ -4,14 +4,14 @@
       "src": "sanity-studio/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "sanity-studio/dist"
+        "distDir": "/dist"
       }
     },
     {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "sanity-studio/dist"
+        "distDir": "/dist"
       }
     }
   ],
